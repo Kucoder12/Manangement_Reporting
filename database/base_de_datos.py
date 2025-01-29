@@ -1,5 +1,7 @@
 import psycopg2
 
+
+
 #conexion a la base de datos
 try :
     conn=psycopg2.connect(
@@ -11,6 +13,8 @@ try :
 
     print("Conexion exitosa")
     cur = conn.cursor()
+
+
 
     #Table_login
     cur.execute('''CREATE TABLE IF NOT EXISTS Login(
@@ -36,6 +40,7 @@ try :
     cur.execute('''CREATE TABLE IF NOT EXISTS Project(
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
+        address TEXT NOT NULL,
         description TEXT NOT NULL,
         start_date DATE NOT NULL,
         end_date DATE NOT NULL,
