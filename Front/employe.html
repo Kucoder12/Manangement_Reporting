@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Services - Empleados</title>
+    <link rel="stylesheet" href="employe.css">
+    <script>
+        function searchEmployee() {
+            const searchInput = document.getElementById("search-input").value.toLowerCase();
+            const rows = document.querySelectorAll("#employee-table tbody tr");
+
+            rows.forEach(row => {
+                const nameCell = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+                const roleCell = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+                if (nameCell.includes(searchInput) || roleCell.includes(searchInput)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Accueil</a></li>
+                <li><a href="employee.html">Employés</a></li>
+                <li><a href="construction-site.html">Chantier</a></li>
+                <li><a href="weekly-report.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Liste des Employés</h2>
+
+        <!-- Barra de búsqueda y botón de añadir empleado -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Rechercher un employé..." onkeyup="searchEmployee()" />
+            <button onclick="window.location.href='add_employe.html';">Ajouter un employé</button>
+        </div>
+
+        <table id="employee-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Rôle</th>
+                    <th>Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí estarán los empleados extraídos de la base de datos -->
+                <tr>
+                    <td>Nom de l'employé 1</td>
+                    <td>Chef de chantier</td>
+                    <td class="action-buttons">
+                        <button>Modifier</button>
+                        <button>Supprimer</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nom de l'employé 2</td>
+                    <td>Ingénieur</td>
+                    <td class="action-buttons">
+                        <button>Modifier</button>
+                        <button>Supprimer</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nom de l'employé 3</td>
+                    <td>Technicien</td>
+                    <td class="action-buttons">
+                        <button>Modifier</button>
+                        <button>Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Good Services. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+

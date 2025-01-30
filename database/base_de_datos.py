@@ -30,7 +30,7 @@ try :
         name TEXT NOT NULL,
         last_name TEXT NOT NULL,
         phone TEXT NOT NULL,
-        role TEXT NOT NULL,
+        role TEXT NOT NULL ,
         id_login INTEGER NOT NULL,
         FOREIGN KEY (id_login) REFERENCES Login(id)
         )''')

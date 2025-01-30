@@ -1,0 +1,156 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente entre los dos colores */
+    color: #fff;
+    padding: 20px 50px; /* Espaciado más relajado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-bottom: 4px solid #fff;
+    border-radius: 10px;
+}
+
+/* Logo Good Services */
+header .logo {
+    font-size: 2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+header .logo:hover {
+    transform: scale(1.05); /* Efecto de agrandamiento suave */
+}
+
+/* Barra de navegación */
+nav {
+    background: linear-gradient(135deg, #FF8C00, #58D68D); /* Gradiente en la barra de navegación */
+    border-radius: 8px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+}
+
+nav ul li {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+    background-color: #58D68D; /* Hover color */
+    transform: translateY(-4px); /* Efecto de movimiento más suave */
+    color: #fff;
+}
+
+/* Estilos para secciones */
+section {
+    margin: 30px;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+section p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+section a {
+    color: #58D68D;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+section a:hover {
+    color: #FF8C00;
+    text-decoration: underline;
+}
+
+/* Estilos del footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente de pie de página */
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 3px solid #fff;
+}
+
+footer p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li a {
+        padding: 12px 25px;
+        margin: 5px 0;
+    }
+
+    section {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+
+
+
+

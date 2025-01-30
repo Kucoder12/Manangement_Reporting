@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un employé</title>
+    <link rel="stylesheet" href="add_employe.css">
+</head>
+<body>
+</head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Accueil</a></li>
+                <li><a href="employee.html">Employés</a></li>
+                <li><a href="construction-site.html">Chantier</a></li>
+                <li><a href="weekly-report.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Ajouter un employé</h2>
+        <form action="process_employee.php" method="POST">
+            <div>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="surname">Prénom :</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+            <div>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="phone">Numéro de téléphone :</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+                <label for="role">Rôle :</label>
+                <select id="role" name="role" required>
+                    <option value="employee">Ouvrier</option>
+                    <option value="manager">Responsable</option>
+                    
+                </select>
+            </div>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Good Services. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
