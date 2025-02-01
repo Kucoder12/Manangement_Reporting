@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapports Administratifs</title>
+    <link rel="stylesheet" href="weekly-report.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Accueil</a></li>
+                <li><a href="employe.html">Employés</a></li>
+                <li><a href="chantier.html">Chantier</a></li>
+                <li><a href="weekly-report.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="report-section" id="admin-report">
+            <h2>Rapport Hebdomadaire (Admin)</h2>
+            <button onclick="createWeeklyReport()">Créer un Rapport Hebdomadaire</button>
+        </section>
+
+        <section class="report-section" id="daily-report">
+            <h2>Rapport Quotidien (Admin & Responsable)</h2>
+            <button onclick="createDailyReport()">Créer un Rapport Quotidien</button>
+        </section>
+    </main>
+
+    <script>
+        function createWeeklyReport() {
+            const userRole = "admin"; // Ajusta esto según el rol del usuario
+            if (userRole !== "admin") {
+                alert("Seul l'administrateur peut créer un rapport hebdomadaire.");
+                return;
+            }
+            window.open("create_weekly_report.html", "_blank");
+        }
+
+        function createDailyReport() {
+            window.open("create_daily_report.html", "_blank");
+        }
+    </script>
+</body>
+</html>
+

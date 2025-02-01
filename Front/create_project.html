@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Projet</title>
+    <link rel="stylesheet" href="create_project.css">
+</head>
+<header>
+    <div class="logo">Good Services</div>
+    <nav>
+        <ul>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="employe.html ">Employer</a></li>
+            <li><a href="chantier.html">Chantier</a></li>
+            <li><a href="#weekly-report">Rapport hebdomadaire</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <h1>Créer un Nouveau Projet</h1>
+        <form id="projectForm">
+            <label for="projectName">Nom du projet :</label>
+            <input type="text" id="projectName" name="projectName" required>
+
+            <label for="startDate">Date de début :</label>
+            <input type="date" id="startDate" name="startDate" required>
+
+            <label for="endDate">Date de fin :</label>
+            <input type="date" id="endDate" name="endDate" required>
+
+            <label for="responsible">Responsable :</label>
+            <input type="text" id="responsible" name="responsible" required>
+
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("projectForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Projet créé avec succès !");
+            window.close();
+        });
+    </script>
+</body>
+</html>
