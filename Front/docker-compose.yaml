@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    container_name: miapp-nginx
+    ports:
+      - "9090:80"
