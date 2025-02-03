@@ -20,31 +20,112 @@
     </header>
     
     <main class="container">
-        <section class="report-section" id="admin-report">
-            <h2>Rapport Hebdomadaire (Admin)</h2>
-            <button onclick="createWeeklyReport()">Créer un Rapport Hebdomadaire</button>
-        </section>
-
-        <section class="report-section" id="daily-report">
-            <h2>Rapport Quotidien (Admin & Responsable)</h2>
-            <button onclick="createDailyReport()">Créer un Rapport Quotidien</button>
-        </section>
+        <h2>Calendrier des Rapports</h2>
+        <div class="calendar-controls">
+            <button onclick="changeMonth(-1)">◄ Mois précédent</button>
+            <span id="current-month"></span>
+            <button onclick="changeMonth(1)">Mois suivant ►</button>
+        </div>
+        <div id="calendar"></div>
+        
+        <div class="report-actions">
+            <a href="create-weekly-report.html"><button>Créer un rapport hebdomadaire (Admin)</button></a>
+            <a href="create-daily-report.html"><button>Créer un rapport quotidien (Responsable)</button></a>
+        </div>
+        
+        <div class="search-container">
+            <h3>Rechercher un Rapport</h3>
+            <input type="text" id="search-input" placeholder="Rechercher par date ou contenu..." onkeyup="searchReports()">
+            <ul id="search-results"></ul>
+        </div>
     </main>
 
     <script>
-        function createWeeklyReport() {
-            const userRole = "admin"; // Ajusta esto según el rol del usuario
-            if (userRole !== "admin") {
-                alert("Seul l'administrateur peut créer un rapport hebdomadaire.");
-                return;
-            }
-            window.open("create_weekly_report.html", "_blank");
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+        let reports = {};
+
+        function updateMonthDisplay() {
+            document.getElementById("current-month").textContent = `${months[currentMonth]} ${currentYear}`;
         }
 
-        function createDailyReport() {
-            window.open("create_daily_report.html", "_blank");
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateMonthDisplay();
+            generateCalendar();
         }
+
+        function generateCalendar() {
+            const calendarContainer = document.getElementById("calendar");
+            calendarContainer.innerHTML = "";
+            
+            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            firstDay = firstDay === 0 ? 7 : firstDay;
+            
+            let table = "<table class='calendar-table'><thead><tr>";
+            const daysOfWeek = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+            daysOfWeek.forEach(day => table += `<th>${day}</th>`);
+            table += "</tr></thead><tbody><tr>";
+
+            for (let i = 1; i < firstDay; i++) {
+                table += "<td></td>";
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                if ((firstDay + day - 2) % 7 === 0 && day !== 1) {
+                    table += "</tr><tr>";
+                }
+                let reportText = reports[`${currentYear}-${currentMonth + 1}-${day}`] || "";
+                table += `<td id='day-${day}' onclick='viewReport(${day})'>${day}<br><span class='report-text'>${reportText}</span></td>`;
+            }
+            
+            table += "</tr></tbody></table>";
+            calendarContainer.innerHTML = table;
+        }
+
+        function viewReport(day) {
+            let reportKey = `${currentYear}-${currentMonth + 1}-${day}`;
+            alert(reports[reportKey] || "Aucun rapport pour ce jour");
+        }
+
+        function searchReports() {
+            let query = document.getElementById("search-input").value.toLowerCase();
+            let resultsContainer = document.getElementById("search-results");
+            resultsContainer.innerHTML = "";
+            
+            Object.keys(reports).forEach(key => {
+                if (reports[key].toLowerCase().includes(query)) {
+                    let li = document.createElement("li");
+                    li.textContent = `${key}: ${reports[key]}`;
+                    resultsContainer.appendChild(li);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateMonthDisplay();
+            generateCalendar();
+        });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 

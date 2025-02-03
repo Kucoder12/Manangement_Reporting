@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Rapport Quotidien</title>
+    <link rel="stylesheet" href="create-daily-report.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Accueil</a></li>
+                <li><a href="employe.html">Employés</a></li>
+                <li><a href="chantier.html">Chantier</a></li>
+                <li><a href="weekly-report.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <h2>Créer un Rapport Quotidien</h2>
+        <form id="daily-report-form">
+            <label for="date">Date :</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="site">Lieu ou Nom de l'Œuvre :</label>
+            <input type="text" id="site" name="site" required>
+            
+            <label for="employee">Travailleur Responsable :</label>
+            <input type="text" id="employee" name="employee" required>
+            
+            <label for="machines">Nombre de Machines Utilisées :</label>
+            <input type="number" id="machines" name="machines" min="0" required>
+            
+            <h3>Avancement du Jour</h3>
+            <label>La construction était-elle comme laissée hier ?</label>
+            <select id="same_state" name="same_state" required>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>
+            
+            <label>Le travail a-t-il avancé selon le plan ?</label>
+            <select id="progress" name="progress" required>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>
+            
+            <label>A-t-on travaillé toute la journée ?</label>
+            <select id="full_day" name="full_day" required>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>
+            
+            <label for="hours_worked">Si non, combien d'heures travaillées ?</label>
+            <input type="number" id="hours_worked" name="hours_worked" min="0" max="24">
+            
+            <label>Les machines et outils étaient-ils dans le même état que la veille ?</label>
+            <select id="tools_condition" name="tools_condition" required>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>
+            
+            <label>Y a-t-il eu des retards ou des problèmes sur le site ?</label>
+            <select id="delays" name="delays" required>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+            </select>
+            
+            <label for="delay_reason">Si oui, précisez :</label>
+            <textarea id="delay_reason" name="delay_reason" rows="3"></textarea>
+            
+            <label for="comments">Commentaires supplémentaires :</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+            
+            <label for="photos">Télécharger des photos de l'avancement :</label>
+            <input type="file" id="photos" name="photos" multiple accept="image/*">
+            
+            <button type="submit">Soumettre le rapport</button>
+        </form>
+    </main>
+    
+    <script>
+        document.getElementById("daily-report-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Rapport soumis avec succès !");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
