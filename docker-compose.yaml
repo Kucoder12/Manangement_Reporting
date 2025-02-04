@@ -20,7 +20,7 @@ services:
     container_name: goodserviceAPI
     image: backend
     build:
-      context: ./backend
+      context: ./Backend
       dockerfile: Dockerfile
     ports:
       - '7000:80'
