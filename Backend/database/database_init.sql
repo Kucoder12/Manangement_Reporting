@@ -1,12 +1,11 @@
 
-#Table_login
 CREATE TABLE IF NOT EXISTS data_login(id SERIAL PRIMARY KEY SERIAL,
                                     username TEXT NOT NULL,
                                     pass TEXT NOT NULL UNIQUE,
                                 );
 
 
-#Table_User
+
 CREATE TABLE IF NOT EXISTS Employes( id SERIAL PRIMARY KEY SERIAL,
                                     "name" TEXT NOT NULL,
                                     last_name TEXT NOT NULL,
@@ -17,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Employes( id SERIAL PRIMARY KEY SERIAL,
                                     );
 
 
-# Table_Project
+
 CREATE TABLE IF NOT EXISTS Project(id SERIAL PRIMARY KEY SERIAL,
                                     "name" TEXT NOT NULL,
                                     "address" TEXT NOT NULL,
@@ -30,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Project(id SERIAL PRIMARY KEY SERIAL,
                                     );
     
 
-#Table_user_project
+
 CREATE TABLE IF NOT EXISTS User_Project(id SERIAL PRIMARY KEY SERIAL,
                                         id_user INTEGER NOT NULL,
                                         id_project INTEGER NOT NULL,
@@ -39,7 +38,7 @@ CREATE TABLE IF NOT EXISTS User_Project(id SERIAL PRIMARY KEY SERIAL,
                                         );
 
 
-#Table_user_reporting
+
 CREATE TABLE IF NOT EXISTS User_Reporting(id SERIAL PRIMARY KEY SERIAL,
                                         id_user INTEGER NOT NULL,
                                         id_project INTEGER NOT NULL,
