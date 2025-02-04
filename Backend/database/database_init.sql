@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS data_login(id SERIAL PRIMARY KEY,
                                     username TEXT NOT NULL,
-                                    pass TEXT NOT NULL UNIQUE,
+                                    pass TEXT NOT NULL UNIQUE
                                 );
 
 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Employes( id SERIAL PRIMARY KEY,
                                     email TEXT NOT NULL UNIQUE,
                                     phone TEXT NOT NULL,
                                     "role" TEXT NOT NULL ,
-                                    FOREIGN KEY (id) REFERENCES Login(id)
+                                    FOREIGN KEY (id) REFERENCES data_login(id)
                                     );
 
 
