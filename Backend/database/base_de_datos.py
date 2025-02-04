@@ -24,6 +24,13 @@ class Connection_Database():
                     '{role}'
                     )""")
         self.conn.commit()
+    
+    async def get_users_all(self):
+        cur = self.conn.cursor()
+        cur.execute("""SELECT * FROM Employes""")
+        users = cur.fetchall()
+        
+        return users
         
         
 

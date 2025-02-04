@@ -23,8 +23,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - '8080:80'
+      - '7000:80'
     depends_on:
       database:
         condition: service_healthy
+  
+    web:
+    build: .
+    container_name: miapp-nginx
+    ports:
+      - "7070:80"
 
