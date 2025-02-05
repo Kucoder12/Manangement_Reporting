@@ -6,17 +6,17 @@ class Connection_Database():
         try :
             #conexion a la base de datos
             self.conn = psycopg2.connect(
-                host="localhost", 
-                database="PROJECT_MANAGEMENT", 
+                host="database", 
+                database="good_services", 
                 user="postgres", 
-                password="Andres123.", 
-                port="5432")
+                password="Goodservices.2025!", 
+                )
         except:
             print("Error de conexión a la Base de datos")
             
     async def add_employe(self, name:str, lastname:str, email:str, phone:int, role:str):
         cur = self.conn.cursor()
-        cur.execute(f"""INSERT INTO Employes (name, last_name, email, phone, role VALUES (
+        cur.execute(f"""INSERT INTO Employes (name, last_name, email, phone, role) VALUES (
                     '{name}',
                     '{lastname}',
                     '{email}',
