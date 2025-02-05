@@ -6,6 +6,14 @@ from database.db_connect import *
 myapp = FastAPI()
 myapp.title = "Good Service API"
 
+@myapp.get('/login')
+async def validateLogin(username:str, password:str):
+    user='pepe'
+    passw='hola'
+    
+    if user==username and passw==password:
+        return {"message":"Todo okey mi perro"}
+    
 @myapp.get('/users/all')
 async def get_users(database=Depends(get_db)):
     employes=database.get_users_all()
