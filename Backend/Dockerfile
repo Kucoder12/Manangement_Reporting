@@ -1,10 +1,10 @@
 FROM python:3.10-slim
 
-ENV APP_HOME /app
+ENV APP_HOME=/app
 WORKDIR ${APP_HOME}
 
-COPY . ./
+COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0" ,"--port" ,"80" ]
+CMD [ "uvicorn", "main:myapp", "--host", "0.0.0.0" ,"--port" ,"80" ]

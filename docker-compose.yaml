@@ -6,8 +6,8 @@ services:
       POSTGRES_DB: good_services
       POSTGRES_PASSWORD: Goodservices.2025!
     volumes:
-      - "./backend/volumes_postgres:/var/lib/postgresql/data"
-      - "./backend/database/database_init.sql:/docker-entrypoint-initdb.d/database_init.sql"
+      - "./Backend/volumes_postgres:/var/lib/postgresql/data"
+      - "./Backend/database/database_init.sql:/docker-entrypoint-initdb.d/database_init.sql"
     ports:
       - '5432:5432'
     healthcheck:
@@ -18,13 +18,20 @@ services:
   
   backend:
     container_name: goodserviceAPI
-    image: backend
     build:
-      context: ./backend
+      context: ./Backend
       dockerfile: Dockerfile
     ports:
-      - '8080:80'
+      - '8000:80'
     depends_on:
       database:
         condition: service_healthy
+
+  web:
+    build: 
+      context: ./Front
+      dockerfile: Dockerfile
+    container_name: miapp-nginx
+    ports:
+      - "8080:80"
 
