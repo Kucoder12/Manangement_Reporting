@@ -12,7 +12,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     };
 
     // Hacer la solicitud POST a tu API (backend)
-    fetch('http://localhost:8080/login', { // Cambia la URL a la de tu backend
+    fetch('http://goodservice/login', { // Cambia la URL a la de tu backend
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS data_login(id SERIAL PRIMARY KEY,
 
 
 
-CREATE TABLE IF NOT EXISTS Employes( id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Employes(id SERIAL,
+                                    cdi TEXT NOT NULL PRIMARY KEY
                                     "name" TEXT NOT NULL,
                                     last_name TEXT NOT NULL,
                                     email TEXT NOT NULL UNIQUE,
