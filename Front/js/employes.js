@@ -1,5 +1,5 @@
 // URL de la PokeAPI para Pikachu
-const url = "http://localhost:8000/employes"
+const url = "http://45.235.98.252:7000/employes"
 // Hacer la solicitud con fetch
 fetch(url)
     .then(response => response.json()) // Convertir la respuesta a JSON

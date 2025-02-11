@@ -1,4 +1,4 @@
-const url = "http://localhost:8000/projects"
+const url = "http://45.235.98.252:7000/projects"
 // Hacer la solicitud con fetch
 fetch(url)
     .then(response => response.json()) // Convertir la respuesta a JSON
