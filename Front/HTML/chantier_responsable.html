@@ -2,10 +2,40 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendrier</title>
-    <link rel="stylesheet" href="../css/chantier_responsable.css">
+    <title>Good Services - Employés</title>
+    <link rel="stylesheet" href="../CSS/chantier_responsable.css">
+    <script>
+        function searchEmployee() {
+            const searchInput = document.getElementById("search-input").value.toLowerCase();
+            const rows = document.querySelectorAll("#employee-table tbody tr");
+
+            rows.forEach(row => {
+                const nameCell = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                const roleCell = row.querySelector("td:nth-child(6)").textContent.toLowerCase();
+
+                if (nameCell.includes(searchInput) || roleCell.includes(searchInput)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
 </head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Accueil</a></li>
+                <li><a href="employe.html">Employés</a></li>
+                <li><a href="chantier.html">Chantier</a></li>
+                <li><a href="weekly-report.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
 <body>
     <main>
         <div>
