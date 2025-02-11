@@ -167,6 +167,29 @@
                 document.querySelectorAll("td").forEach(cell => cell.style.backgroundColor = "");
             }
         }
+            document.addEventListener("DOMContentLoaded", function () {
+                 document.getElementById("searchProject").addEventListener("keyup", searchProjects);
+            });
+
+            function searchProjects() {
+                let input = document.getElementById("searchProject").value.toLowerCase();
+                let table = document.getElementById("projectTableBody");
+                let rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    let cells = rows[i].getElementsByTagName("td");
+                    let found = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(input)) {
+                        found = true;
+                        break;
+                     }
+                }
+
+                 rows[i].style.display = found ? "" : "none";
+            }
+        }
 
         document.getElementById("editMultipleDays").addEventListener("click", editMultipleDays);
         document.getElementById("deleteMultipleDays").addEventListener("click", deleteMultipleDays);
