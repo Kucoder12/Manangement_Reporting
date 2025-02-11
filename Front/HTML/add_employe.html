@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un employé</title>
     <link rel="stylesheet" href="../css/add_employe.css">
+    <script src="./../js/add_employe.js" defer></script>
 </head>
 <body>
 </head>
@@ -24,22 +25,26 @@
 
     <section>
         <h2>Ajouter un employé</h2>
-        <form action="process_employee.php" method="POST">
+        <form id="add_employe_form">
+            <div>
+                <label for="name">CDI :</label>
+                <input type="text" id="cdi" name="cdi" required>
+            </div>
             <div>
                 <label for="name">Nom :</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div>
                 <label for="surname">Prénom :</label>
-                <input type="text" id="surname" name="surname" required>
+                <input type="text" id="last_name" name="last_name" required>
             </div>
             <div>
                 <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
+                <input type="text" id="email" name="email" required>
             </div>
             <div>
                 <label for="phone">Numéro de téléphone :</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="phone" id="phone" name="phone" required>
             </div>
             <div>
                 <label for="role">Rôle :</label>

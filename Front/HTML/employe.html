@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Services - Employés</title>
     <link rel="stylesheet" href="../css/employe.css">
+    <script src="./../js/employes.js"></script>
     <script>
         function searchEmployee() {
             const searchInput = document.getElementById("search-input").value.toLowerCase();
@@ -58,44 +59,9 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="employes">
                 <!-- Aquí estarán los empleados extraídos de la base de datos -->
-                <tr>
-                    <td>12345</td>
-                    <td>Dupont</td>
-                    <td>Jean</td>
-                    <td>jean.dupont@example.com</td>
-                    <td>+33 6 12 34 56 78</td>
-                    <td>Chef de chantier</td>
-                    <td class="action-buttons">
-                        <button>Modifier</button>
-                        <button>Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>67890</td>
-                    <td>Martin</td>
-                    <td>Sophie</td>
-                    <td>sophie.martin@example.com</td>
-                    <td>+33 6 98 76 54 32</td>
-                    <td>Ingénieur</td>
-                    <td class="action-buttons">
-                        <button>Modifier</button>
-                        <button>Supprimer</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>11223</td>
-                    <td>Leroy</td>
-                    <td>Paul</td>
-                    <td>paul.leroy@example.com</td>
-                    <td>+33 6 87 65 43 21</td>
-                    <td>Technicien</td>
-                    <td class="action-buttons">
-                        <button>Modifier</button>
-                        <button>Supprimer</button>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </section>

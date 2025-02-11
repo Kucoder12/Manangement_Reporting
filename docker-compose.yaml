@@ -27,11 +27,11 @@ services:
     #  database:
     #    condition: service_healthy
 
-  web:
-    build: 
-      context: ./Front
-      dockerfile: Dockerfile
-    container_name: miapp-nginx
-    ports:
-      - "8080:80"
+  #web:
+  #  build: 
+  #    context: ./Front
+  #    dockerfile: Dockerfile
+  #  container_name: miapp-nginx
+  #  ports:
+  #    - "8080:80"
 
