@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier</title>
+    <link rel="stylesheet" href="../css/chantier_responsable.css">
+</head>
+<body>
+    <main>
+        <div>
+            <button id="prevMonth" onclick="changeMonth(-1)">◄</button>
+            <span id="currentMonth"></span>
+            <button id="nextMonth" onclick="changeMonth(1)">►</button>
+        </div>
+        <div id="calendar"></div>
+    </main>
+
+    <script>
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+        const daysOfWeek = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateMonthDisplay();
+            renderCalendar();
+        });
+
+        function updateMonthDisplay() {
+            document.getElementById("currentMonth").textContent = `${months[currentMonth]} ${currentYear}`;
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateMonthDisplay();
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const calendar = document.getElementById("calendar");
+            calendar.innerHTML = "";
+
+            let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            if (firstDay === 0) firstDay = 7;
+            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            let table = "<table border='1'><tr>";
+            daysOfWeek.forEach(day => {
+                table += `<th>${day}</th>`;
+            });
+            table += "</tr><tr>";
+
+            for (let i = 1; i < firstDay; i++) {
+                table += "<td></td>";
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                if ((day + firstDay - 2) % 7 === 0) {
+                    table += "</tr><tr>";
+                }
+                table += `<td>${day}</td>`;
+            }
+
+            table += "</tr></table>";
+            calendar.innerHTML = table;
+        }
+    </script>
+</body>
+</html>

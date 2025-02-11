@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good Services - Empleados</title>
-    <link rel="stylesheet" href="../css/employe.css">
+    <title>Good Services - Employés</title>
+    <link rel="stylesheet" href="../CSS/employe.css">
     <script>
         function searchEmployee() {
             const searchInput = document.getElementById("search-input").value.toLowerCase();
             const rows = document.querySelectorAll("#employee-table tbody tr");
 
             rows.forEach(row => {
-                const nameCell = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
-                const roleCell = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                const nameCell = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                const roleCell = row.querySelector("td:nth-child(6)").textContent.toLowerCase();
 
                 if (nameCell.includes(searchInput) || roleCell.includes(searchInput)) {
                     row.style.display = "";
@@ -49,15 +49,23 @@
         <table id="employee-table">
             <thead>
                 <tr>
+                    <th>CDI</th>
                     <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
                     <th>Rôle</th>
-                    <th>Rôle</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Aquí estarán los empleados extraídos de la base de datos -->
                 <tr>
-                    <td>Nom de l'employé 1</td>
+                    <td>12345</td>
+                    <td>Dupont</td>
+                    <td>Jean</td>
+                    <td>jean.dupont@example.com</td>
+                    <td>+33 6 12 34 56 78</td>
                     <td>Chef de chantier</td>
                     <td class="action-buttons">
                         <button>Modifier</button>
@@ -65,7 +73,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Nom de l'employé 2</td>
+                    <td>67890</td>
+                    <td>Martin</td>
+                    <td>Sophie</td>
+                    <td>sophie.martin@example.com</td>
+                    <td>+33 6 98 76 54 32</td>
                     <td>Ingénieur</td>
                     <td class="action-buttons">
                         <button>Modifier</button>
@@ -73,7 +85,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Nom de l'employé 3</td>
+                    <td>11223</td>
+                    <td>Leroy</td>
+                    <td>Paul</td>
+                    <td>paul.leroy@example.com</td>
+                    <td>+33 6 87 65 43 21</td>
                     <td>Technicien</td>
                     <td class="action-buttons">
                         <button>Modifier</button>
@@ -89,6 +105,7 @@
     </footer>
 </body>
 </html>
+
 
 
 
