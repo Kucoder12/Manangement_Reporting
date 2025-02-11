@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Employé</title>
+    <link rel="stylesheet" href="../css/edit_employe.css">
+    <script>
+        function chargerEmploye() {
+            
+            
+            document.querySelector("input[name='cdi']").value = employe.cdi;
+            document.querySelector("input[name='nom']").value = employe.nom;
+            document.querySelector("input[name='prenom']").value = employe.prenom;
+            document.querySelector("input[name='gmail']").value = employe.gmail;
+            document.querySelector("input[name='telephone']").value = employe.telephone;
+            document.querySelector("select[name='role']").value = employe.role;
+        }
+
+        function enregistrerModification(event) {
+            event.preventDefault();
+            alert("Les modifications ont été enregistrées avec succès !");
+        }
+    </script>
+</head>
+<body onload="chargerEmploye()">
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="employe.html">Employer</a></li>
+                <li><a href="chantier.html">Chantier</a></li>
+                <li><a href="#weekly-report">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Modifier un Employé</h2>
+        <form onsubmit="enregistrerModification(event)">
+            <div class="form-group">
+                <label>CDI</label>
+                <input type="text" name="cdi">
+            </div>
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" name="nom">
+            </div>
+            <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" name="prenom">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="gmail">
+            </div>
+            <div class="form-group">
+                <label>Téléphone</label>
+                <input type="tel" name="telephone">
+            </div>
+            <div class="form-group">
+                <label>Rôle</label>
+                <select name="role">
+                    <option value="">Sélectionner un rôle</option>
+                    <option value="Employé">Employé</option>
+                    <option value="Responsable">Responsable</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+

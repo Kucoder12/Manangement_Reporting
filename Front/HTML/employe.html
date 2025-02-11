@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Services - Employés</title>
-    <link rel="stylesheet" href="../CSS/employe.css">
+    <link rel="stylesheet" href="../css/employe.css">
     <script>
         function searchEmployee() {
             const searchInput = document.getElementById("search-input").value.toLowerCase();
@@ -99,6 +99,35 @@
             </tbody>
         </table>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Seleccionar todos los botones "Modifier"
+            document.querySelectorAll(".action-buttons button:nth-child(1)").forEach(button => {
+                button.addEventListener("click", function () {
+                    let row = this.closest("tr"); // Obtener la fila del empleado
+                    let id = row.cells[0].textContent; // Obtener el ID del empleado (CDI)
+                    alert("Modifier l'employé avec ID: " + id);
+                    // Aquí puedes redirigir a la página de modificación o abrir un formulario modal
+                    window.location.href = "edit_employe.html?id=" + id;
+                });
+            });
+    
+            // Seleccionar todos los botones "Supprimer"
+            document.querySelectorAll(".action-buttons button:nth-child(2)").forEach(button => {
+                button.addEventListener("click", function () {
+                    let row = this.closest("tr"); // Obtener la fila del empleado
+                    let id = row.cells[0].textContent; // Obtener el ID del empleado (CDI)
+    
+                    if (confirm("Voulez-vous vraiment supprimer l'employé avec ID " + id + " ?")) {
+                        // Aquí se debe hacer una petición al servidor para eliminar al empleado
+                        alert("L'employé " + id + " a été supprimé !");
+                        row.remove(); // Elimina la fila visualmente (pero no de la base de datos)
+                    }
+                });
+            });
+        });
+    </script>
+    
 
     <footer>
         <p>&copy; 2025 Good Services. Tous droits réservés.</p>
