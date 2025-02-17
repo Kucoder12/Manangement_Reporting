@@ -26,6 +26,9 @@ fetch(url)
             <td>${email}</td>
             <td>${phone}</td>
             <td>${role}</td>
+            <td><button class="btn btn-danger" onclick="deleteEmploye(${cdi})">Eliminar</button>
+                <button class="btn btn-warning" onclick="updateEmploye(${cdi})">Actualizar</button>
+            </td>
 
         `;
             tabla.appendChild(row);

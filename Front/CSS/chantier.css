@@ -5,17 +5,13 @@
     box-sizing: border-box;
 }
 
-/* Estilos globales */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7f7f7;
     color: #333;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
 }
 
-/* Encabezado */
 header {
     background: linear-gradient(135deg, #58D68D, #FF8C00); 
     color: #fff;
@@ -33,105 +29,115 @@ header .logo {
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
-    margin: 0;
 }
 
-/* Barra de navegación */
 nav ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    font-size: 1.1rem;
-    font-weight: 500;
+    gap: 20px;
 }
 
 nav ul li a {
     text-decoration: none;
     color: #fff;
-    padding: 12px 20px;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: background 0.3s, transform 0.2s;
 }
 
 nav ul li a:hover {
     background-color: #58D68D;
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 }
 
-/* Contenedor principal */
 main {
-    margin: 30px;
-    padding: 30px;
+    margin: 20px;
+    padding: 20px;
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-#calendar {
+h1 {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#project-list {
+    width: 60%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+}
+
+#searchProject {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 20px 0;
+    border: 2px solid #FF8C00;
+    border-radius: 30px;
+    outline: none;
+    transition: 0.3s;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+#searchProject:focus {
+    border-color: #58D68D;
+    box-shadow: 0 0 8px rgba(88, 214, 141, 0.7);
+}
+
+#searchProject::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+#project-list h2 {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-td {
-    width: 14%;
-    height: 80px;
-    text-align: center;
-    vertical-align: top;
+td, th {
     border: 1px solid #ccc;
-    padding: 5px;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease;
+    padding: 12px;
+    text-align: center;
+    background: #f9f9f9;
 }
 
-td:hover {
-    background-color: #58D68D;
-    cursor: pointer;
-    color: white;
-}
-
-.project {
+th {
     background-color: #FF8C00;
     color: white;
-    padding: 5px;
-    border-radius: 5px;
-    margin-top: 5px;
-    text-align: center;
-}
-
-.task {
-    background-color: #58D68D;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    margin-top: 5px;
-    text-align: center;
 }
 
 button {
     background-color: #FF8C00;
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 8px 14px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #58D68D;
 }
 
-/* Estilos de pie de página */
 footer {
     text-align: center;
     padding: 15px;
@@ -143,7 +149,5 @@ footer {
     border-top: 3px solid #fff;
 }
 
-footer p {
-    font-size: 1rem;
-    font-weight: 400;
-}
+
+

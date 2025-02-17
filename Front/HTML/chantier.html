@@ -27,14 +27,6 @@
                 <button id="createProjectBtn" onclick="openProjectCreation()">Créer un Projet</button>
                 <input type="text" id="searchProject" placeholder="Rechercher un projet..." onkeyup="searchProjects()">
             </div>
-            <div>
-                <button id="prevMonth" onclick="changeMonth(-1)">◄</button>
-                <span id="currentMonth"></span>
-                <button id="nextMonth" onclick="changeMonth(1)">►</button>
-            </div>
-            <div id="calendar"></div>
-            <button id="editMultipleDays">Modifier plusieurs jours</button>
-            <button id="deleteMultipleDays">Supprimer les tâches sélectionnées</button>
         </section>
 
         <section id="project-list">
@@ -43,11 +35,12 @@
                 <thead>
                     <tr>
                         <th>Nom du projet</th>
-                        <th>Responsable</th>
+                        <th>Dirrecion</th>
                         <th>Début</th>
                         <th>Fin</th>
                         <th>Statut</th>
                         <th>Actions</th>
+                        <th>Responsable</th>
                     </tr>
                 </thead>
                 <tbody id="projectTableBody">
@@ -58,139 +51,9 @@
     </main>
 
     <script>
-
          function openProjectCreation() {
              window.open("create_project.html", "_blank");
          }
-
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
-        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-        const daysOfWeek = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-        let tasksByDay = {};
-        let selectedDays = new Set();
-
-        document.addEventListener("DOMContentLoaded", () => {
-            updateMonthDisplay();
-            renderCalendar();
-        });
-
-        function updateMonthDisplay() {
-            document.getElementById("currentMonth").textContent = `${months[currentMonth]} ${currentYear}`;
-        }
-
-        function changeMonth(direction) {
-            currentMonth += direction;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            } else if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            updateMonthDisplay();
-            renderCalendar();
-        }
-
-        function renderCalendar() {
-            const calendar = document.getElementById("calendar");
-            calendar.innerHTML = "";
-
-            let firstDay = new Date(currentYear, currentMonth, 1).getDay();
-            if (firstDay === 0) firstDay = 7;
-            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            
-            let table = "<table border='1'><tr>";
-            daysOfWeek.forEach(day => {
-                table += `<th>${day}</th>`;
-            });
-            table += "</tr><tr>";
-
-            for (let i = 1; i < firstDay; i++) {
-                table += "<td></td>";
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                if ((day + firstDay - 2) % 7 === 0) {
-                    table += "</tr><tr>";
-                }
-                let taskContent = tasksByDay[day] ? `<div class='task-content'>${tasksByDay[day]}</div>` : "";
-                table += `<td id='day-${day}' onclick='toggleDaySelection(${day})'>${day}${taskContent}</td>`;
-            }
-
-            table += "</tr></table>";
-            calendar.innerHTML = table;
-        }
-
-        function toggleDaySelection(day) {
-            let dayCell = document.getElementById(`day-${day}`);
-            if (selectedDays.has(day)) {
-                selectedDays.delete(day);
-                dayCell.style.backgroundColor = "";
-            } else {
-                selectedDays.add(day);
-                dayCell.style.backgroundColor = "lightblue";
-            }
-        }
-
-        function editMultipleDays() {
-            if (selectedDays.size === 0) {
-                alert("Veuillez sélectionner au moins un jour à modifier.");
-                return;
-            }
-            let details = prompt("Modifier les tâches pour les jours sélectionnés :");
-            if (details) {
-                selectedDays.forEach(day => {
-                    let dayCell = document.getElementById(`day-${day}`);
-                    dayCell.innerHTML += `
-                        <div class='task'>
-                            ${details}
-                            <button class='delete-btn' onclick='deleteItem(event, ${day})'>✖</button>
-                        </div>`;
-                });
-                selectedDays.clear();
-                document.querySelectorAll("td").forEach(cell => cell.style.backgroundColor = "");
-            }
-        }
-
-        function deleteMultipleDays() {
-            if (selectedDays.size === 0) {
-                alert("Veuillez sélectionner au moins un jour à supprimer.");
-                return;
-            }
-            let confirmDelete = confirm("Voulez-vous supprimer les tâches sélectionnées ?");
-            if (confirmDelete) {
-                selectedDays.forEach(day => {
-                    let dayCell = document.getElementById(`day-${day}`);
-                    dayCell.innerHTML = `${day}`;
-                });
-                selectedDays.clear();
-                document.querySelectorAll("td").forEach(cell => cell.style.backgroundColor = "");
-            }
-        }
-            document.addEventListener("DOMContentLoaded", function () {
-                 document.getElementById("searchProject").addEventListener("keyup", searchProjects);
-            });
-
-            function searchProjects() {
-                let input = document.getElementById("searchProject").value.toLowerCase();
-                let table = document.getElementById("projectTableBody");
-                let rows = table.getElementsByTagName("tr");
-
-                for (let i = 0; i < rows.length; i++) {
-                    let cells = rows[i].getElementsByTagName("td");
-                    let found = false;
-
-                for (let j = 0; j < cells.length; j++) {
-                    if (cells[j].innerText.toLowerCase().includes(input)) {
-                        found = true;
-                        break;
-                     }
-                }
-
-                 rows[i].style.display = found ? "" : "none";
-            }
-        }
 
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("searchProject").addEventListener("keyup", searchProjects);
@@ -215,9 +78,7 @@
                 rows[i].style.display = found ? "" : "none";
             }
         }
-
-        document.getElementById("editMultipleDays").addEventListener("click", editMultipleDays);
-        document.getElementById("deleteMultipleDays").addEventListener("click", deleteMultipleDays);
     </script>
+    
 </body>
 </html>
