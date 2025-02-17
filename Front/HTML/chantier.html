@@ -30,23 +30,27 @@
         </section>
 
         <section id="project-list">
-            <h2>Projets en cours</h2>
-            <table id="tableProjects">
-                <thead>
-                    <tr>
-                        <th>Nom du projet</th>
-                        <th>Dirrecion</th>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Statut</th>
-                        <th>Actions</th>
-                        <th>Responsable</th>
-                    </tr>
-                </thead>
-                <tbody id="projectTableBody">
-                    <!-- Les projets seront affichés ici -->
-                </tbody>
-            </table>
+            <div class="project-card">
+                <div class="project-info">
+                    <div class="project-name"></div>
+                    <div class="project-date"></div>
+                </div>
+                <div class="project-arrow">→</div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <div class="project-name"></div>
+                    <div class="project-date"></div>
+                </div>
+                <div class="project-arrow">→</div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <div class="project-name"></div>
+                    <div class="project-date"></div>
+                </div>
+                <div class="project-arrow"> > </div>
+            </div>
         </section>
     </main>
 
@@ -79,6 +83,23 @@
             }
         }
     </script>
+    <script>
+        function openProjectCreation() {
+            window.open("create_project.html", "_blank");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll("#projectTableBody tr");
+
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    const projectName = row.cells[0].innerText;
+                    window.open(`project_details.html?project=${encodeURIComponent(projectName)}`, "_blank");
+                });
+            });
+        });
+    </script>
+
     
 </body>
 </html>

@@ -19,12 +19,8 @@ fetch(url)
 
             row.innerHTML = `
             <td>${name}</td>
-            <td>${address}</td>
-            <td>${description}</td>
             <td>${start_date}</td>
             <td>${end_date}</td>
-            <td>${state}</td>
-            <td>${employe}</td>
         `;
 
         // Agregar la fila a la tabla

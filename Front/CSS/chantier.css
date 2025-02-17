@@ -69,13 +69,45 @@ h1 {
 }
 
 #project-list {
-    width: 60%;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
+
+.project-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    width: 100%;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.project-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.project-arrow {
+    font-size: 1.5rem;
+    color: #FF8C00;
+    cursor: pointer;
+}
+
 
 #searchProject {
     width: 100%;
