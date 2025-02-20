@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS data_login(id SERIAL PRIMARY KEY,
                                     username TEXT NOT NULL,
-                                    pass TEXT NOT NULL UNIQUE
+                                    pass TEXT NULL UNIQUE
                                 );
 
 
@@ -54,45 +54,6 @@ CREATE TABLE IF NOT EXISTS reporting (
     comments TEXT,                 
     photos TEXT[]                  
 );
-
-
-
-CREATE OR REPLACE FUNCTION generate_secure_password() RETURNS TEXT AS $$
-DECLARE
-    chars TEXT := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    result TEXT := '';
-    i INT := 0;
-BEGIN
-    WHILE i < 8 LOOP
-        result := result || substr(chars, floor(random() * length(chars) + 1)::int, 1);
-        i := i + 1;
-    END LOOP;
-    RETURN result;
-END;
-$$ LANGUAGE plpgsql;
-
-
-CREATE OR REPLACE FUNCTION insert_data_login() RETURNS TRIGGER AS $$
-DECLARE
-    generated_username TEXT;
-    generated_password TEXT;
-BEGIN
-    generated_username := lower(substr(NEW."name", 1, 1) || NEW.last_name);
-
-    generated_password := generate_secure_password();
-
-    INSERT INTO data_login (username, pass)
-    VALUES (generated_username, generated_password);
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-
-CREATE TRIGGER trg_insert_data_login
-AFTER INSERT ON Employes
-FOR EACH ROW
-EXECUTE FUNCTION insert_data_login();
 
 
 

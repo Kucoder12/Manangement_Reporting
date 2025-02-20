@@ -16,6 +16,11 @@ class Connection_Database():
             
  # --------------  LOGIN   --------------
  
+    async def insert_password_default(self, username:str, password:str):
+        cur = self.conn.cursor()
+        cur.execute(f"""INSERT INTO data_login (username,pass) VALUES ('{username}','{password}')""")
+        self.conn.commit()
+ 
     async def verify_username(self, username):
         cur =self.conn.cursor()
         cur.execute(f"""SELECT EXISTS (SELECT 1 FROM data_login WHERE username = '{username}')""")

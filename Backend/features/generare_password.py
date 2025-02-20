@@ -1,7 +1,7 @@
 import string
 import secrets
 
-async def generate_password(length=8):
+def generate_password(length=8):
     # Definir el conjunto de caracteres posibles
     caracteres = string.ascii_letters + string.digits + string.punctuation
     # Generar una contraseña aleatoria de la length especificada

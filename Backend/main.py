@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException, Depends, Form 
 from database import get_db
 from database.db_connect import *
+from features.generare_password import *
+from features.hashing import *
 
 
 myapp = FastAPI()
@@ -18,9 +20,8 @@ myapp.add_middleware(
 
 @myapp.post('/login')
 async def validateLogin(username:Annotated[str, Form()], password:Annotated[str, Form()], database=Depends(get_db)):
-    if await database.verify_email(username)
-    
-    i
+    if await database.verify_email(username):
+        return {'message':'algo'}
     
 @myapp.get('/employes',tags=['Users'])
 async def get_employes(database=Depends(get_db)):
@@ -39,6 +40,11 @@ async def get_employes_name(name: str, database=Depends(get_db)):
 @myapp.post('/employes/add', tags=['Users'])
 async def new_user(cdi:Annotated[str, Form()],name:Annotated[str, Form()], last_name:Annotated[str, Form()], email:Annotated[str, Form()], phone:Annotated[int, Form()], role:Annotated[str, Form()], database=Depends(get_db)):
     await database.add_employe(cdi, name,last_name,email, phone,role)
+    username = f"{name[0].lower()}{last_name.lower()}"
+    password_employe = generate_password()
+    hash_password = hashed_password(password_employe)
+    await database.insert_password_default(username,hash_password)
+    
     return {"message":"Se ha insertado el empleado correctamente"}
 
 @myapp.post('employes/{employe_cdi}/delete')
