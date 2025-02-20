@@ -14,6 +14,24 @@ class Connection_Database():
         except:
             print("Error de conexión a la Base de datos")
             
+ # --------------  LOGIN   --------------
+ 
+    async def verify_username(self, username):
+        cur =self.conn.cursor()
+        cur.execute(f"""SELECT EXISTS (SELECT 1 FROM data_login WHERE username = '{username}')""")
+        verify_bool = cur.fetchone()
+        
+        return  verify_bool
+    
+    async def verify_password(self, password):
+        cur =self.conn.cursor()
+        cur.execute(f"""SELECT EXISTS (SELECT 1 FROM data_login WHERE pass = '{password}')""")
+        verify_bool = cur.fetchone()
+        
+        return  verify_bool
+        
+        
+            
  # -------------- EMPLOYES --------------
  
     async def get_employes(self):
@@ -41,6 +59,11 @@ class Connection_Database():
                     '{role}'
                     )""")
         self.conn.commit()
+    
+    async def delete_employe(self,cdi:str):
+        cur=self.conn.cursor()
+        cur.execute(f"""DELETE FROM employe WHERE cdi = '{cdi}'""")
+        self.conn.commit()
         
 # -------------- PROJECTS ----------------
 
@@ -67,6 +90,11 @@ class Connection_Database():
                                                                                                                   '{end_date}',
                                                                                                                   '{state}',
                                                                                                                   1)""")
+        self.conn.commit()
+    
+    async def delete_project(self,project_name):
+        cur=self.conn.cursor()
+        cur.execute(f"""DELETE FROM Project WHERE name = '{project_name}'""")
         self.conn.commit()
         
         

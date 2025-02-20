@@ -16,13 +16,11 @@ myapp.add_middleware(
     allow_headers=["*"],
 )
 
-@myapp.get('/login')
-async def validateLogin(username:str, password:str):
-    user='pepe'
-    passw='hola'
+@myapp.post('/login')
+async def validateLogin(username:Annotated[str, Form()], password:Annotated[str, Form()], database=Depends(get_db)):
+    if await database.verify_email(username)
     
-    if user==username and passw==password:
-        return {"message":"Todo okey mi perro"}
+    i
     
 @myapp.get('/employes',tags=['Users'])
 async def get_employes(database=Depends(get_db)):
@@ -42,6 +40,14 @@ async def get_employes_name(name: str, database=Depends(get_db)):
 async def new_user(cdi:Annotated[str, Form()],name:Annotated[str, Form()], last_name:Annotated[str, Form()], email:Annotated[str, Form()], phone:Annotated[int, Form()], role:Annotated[str, Form()], database=Depends(get_db)):
     await database.add_employe(cdi, name,last_name,email, phone,role)
     return {"message":"Se ha insertado el empleado correctamente"}
+
+@myapp.post('employes/{employe_cdi}/delete')
+async def delete_employe(employe_cdi:str, database=Depends(get_db)):
+    try:
+        await database.delete_employe(employe_cdi)
+        return {'message':'Se ha eliminado correctamente'}
+    except:
+        return {'message':'Ha habido un error al eliminar el empleado'}
 
 
 @myapp.get('/projects', tags=['Projects'])
@@ -84,3 +90,13 @@ async def add_project(name:Annotated[str, Form()],
     
     await database.add_project(name,address,description,start_date,end_date,state,employe_name)
     return {'message':'Se ha creado creado correctamente el proyecto'}
+
+@myapp.post('/projects/{project_name}/delete')
+async def delete_project(project_name:str, database=Depends(get_db)):
+    try:
+        await database.delete_project(project_name)
+        return{'message':'Se ha eliminado correctamente'}
+    except:
+        return {'message':'Ha habido un error'}
+        
+    
