@@ -1,11 +1,10 @@
 import string
 import secrets
 
-def generate_password(length=8):
-    # Definir el conjunto de caracteres posibles
-    caracteres = string.ascii_letters + string.digits + string.punctuation
-    # Generar una contraseña aleatoria de la length especificada
-    password = ''.join(secrets.choice(caracteres) for _ in range(length))
+def generate_password(name:str,last_name:str,phone:int):
+    phone_str = str(phone)
+    password = f"{name[0].upper()}{last_name[0:3].lower()}{phone_str[-3:]}!"
+    
     return password
 
 

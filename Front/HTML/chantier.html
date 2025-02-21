@@ -6,6 +6,7 @@
     <title>Gestion des Projets</title>
     <link rel="stylesheet" href="../css/chantier.css">
     <script src="./../js/chantier.js"></script>
+    <script src="./../js/getInfo_project.js"></script>
 </head>
 <body>
     <header>
@@ -24,33 +25,14 @@
         <section id="top-section">
             <h1>Gestion des Projets</h1>
             <div class="top-controls">
-                <button id="createProjectBtn" onclick="openProjectCreation()">Créer un Projet</button>
                 <input type="text" id="searchProject" placeholder="Rechercher un projet..." onkeyup="searchProjects()">
+                <button id="createProjectBtn" onclick="openProjectCreation()">Créer un Projet</button>
+                
             </div>
         </section>
 
         <section id="project-list">
-            <div class="project-card">
-                <div class="project-info">
-                    <div class="project-name"></div>
-                    <div class="project-date"></div>
-                </div>
-                <div class="project-arrow"> > </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <div class="project-name"></div>
-                    <div class="project-date"></div>
-                </div>
-                <div class="project-arrow"> > </div>
-            </div>
-            <div class="project-card">
-                <div class="project-info">
-                    <div class="project-name"></div>
-                    <div class="project-date"></div>
-                </div>
-                <div class="project-arrow"> > </div>
-            </div>
+            
         </section>
     </main>
 

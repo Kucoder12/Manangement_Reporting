@@ -28,12 +28,12 @@ class Connection_Database():
         
         return  verify_bool
     
-    async def verify_password(self, password):
+    async def get_password(self, username):
         cur =self.conn.cursor()
-        cur.execute(f"""SELECT EXISTS (SELECT 1 FROM data_login WHERE pass = '{password}')""")
-        verify_bool = cur.fetchone()
+        cur.execute(f"""SELECT pass FROM data_login WHERE username = '{username}'""")
+        password = cur.fetchone()
         
-        return  verify_bool
+        return  password
         
         
             

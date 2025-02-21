@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Projet</title>
     <link rel="stylesheet" href="../css/create_project.css">
+    <script src="./../js/add_project.js"></script>
 </head>
 <header>
     <div class="logo">Good Services</div>
@@ -22,38 +23,30 @@
         <h1>Créer un Nouveau Projet</h1>
         <form id="projectForm">
             <label for="projectName">Nom du projet :</label>
-            <input type="text" id="projectName" name="projectName" required>
+            <input type="text" id="name" name="name" required>
 
             <label for="projectName">Address :</label>
-            <input type="text" id="projectAddress" name="projectAddress" required>
+            <input type="text" id="address" name="address" required>
 
             <label for="description">Description :</label>
             <textarea id="description" name="description" rows="4" required></textarea>
 
             <label for="startDate">Date de début :</label>
-            <input type="date" id="startDate" name="startDate" required>
+            <input type="date" id="start_date" name="start_date" required>
 
             <label for="endDate">Date de fin :</label>
-            <input type="date" id="endDate" name="endDate" required>
+            <input type="date" id="end_date" name="end_date" required>
 
             <label for="projectName">state :</label>
-            <input type="text" id="projectState" name="projectState" required>
+            <input type="text" id="state" name="state" required>
 
             <label for="responsible">Responsable :</label>
-            <input type="text" id="responsible" name="responsible" required>
+            <input type="text" id="employe_name" name="employe_name" required>
 
 
 
             <button type="submit">Créer</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById("projectForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Projet créé avec succès !");
-            window.close();
-        });
-    </script>
 </body>
 </html>

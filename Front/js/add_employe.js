@@ -20,7 +20,7 @@ document.getElementById("add_employe_form").addEventListener("submit", async fun
     const urlEncodedData = new URLSearchParams(formData).toString();
 
     try {
-        const response = await fetch("http://45.235.98.252:7000/employes/add", {
+        const response = await fetch("http://localhost:8000/employes/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -30,7 +30,7 @@ document.getElementById("add_employe_form").addEventListener("submit", async fun
 
         if (response.ok) {
             alert("Empleado registrado correctamente.");
-            this.reset();
+            window.location.href = "employe.html";
         } else {
             const errorData = await response.json();
             alert("Error: " + JSON.stringify(errorData));
