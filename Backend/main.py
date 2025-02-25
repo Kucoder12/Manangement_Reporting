@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException, Depends, Form 
 from database import get_db
 from database.db_connect import *
+from features.generare_password import *
+from features.hashing import *
 
 
 myapp = FastAPI()
@@ -18,9 +20,16 @@ myapp.add_middleware(
 
 @myapp.post('/login')
 async def validateLogin(username:Annotated[str, Form()], password:Annotated[str, Form()], database=Depends(get_db)):
-    if await database.verify_email(username)
+    verified_username = await database.verify_username(username)
+    if not verified_username[0]:
+        raise HTTPException(status_code=400, detail="Usuario no encontrado")
     
-    i
+    hashed_password = await database.get_password(username)
+    if not verify_password(password, hashed_password[0]):
+        raise HTTPException(status_code=400, detail="Contraseña incorrecta")
+    
+    return {'message':'Las contraseñas coinciden'}
+        
     
 @myapp.get('/employes',tags=['Users'])
 async def get_employes(database=Depends(get_db)):
@@ -37,9 +46,21 @@ async def get_employes_name(name: str, database=Depends(get_db)):
     return employes
 
 @myapp.post('/employes/add', tags=['Users'])
-async def new_user(cdi:Annotated[str, Form()],name:Annotated[str, Form()], last_name:Annotated[str, Form()], email:Annotated[str, Form()], phone:Annotated[int, Form()], role:Annotated[str, Form()], database=Depends(get_db)):
+async def new_user(cdi:Annotated[str, Form()],
+                   name:Annotated[str, Form()], 
+                   last_name:Annotated[str, Form()], 
+                   email:Annotated[str, Form()], 
+                   phone:Annotated[int, Form()], 
+                   role:Annotated[str, Form()], 
+                   database=Depends(get_db)):
+    
     await database.add_employe(cdi, name,last_name,email, phone,role)
-    return {"message":"Se ha insertado el empleado correctamente"}
+    username = f"{name[0].lower()}{last_name.lower()}"
+    password_employe = generate_password(name,last_name,phone)
+    hash_password = hashed_password(password_employe)
+    await database.insert_password_default(username,hash_password)
+    
+    return {"message":f'{password_employe}'}
 
 @myapp.post('employes/{employe_cdi}/delete')
 async def delete_employe(employe_cdi:str, database=Depends(get_db)):
