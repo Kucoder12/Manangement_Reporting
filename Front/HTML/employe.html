@@ -46,23 +46,10 @@
             <input type="text" id="search-input" placeholder="Rechercher un employé..." onkeyup="searchEmployee()" />
             <button onclick="window.location.href='add_employe.html';">Ajouter un employé</button>
         </div>
+        <div id="employes-list">
 
-        <table id="employee-table">
-            <thead>
-                <tr>
-                    <th>CDI</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Rôle</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="employes">
-                <!-- Aquí estarán los empleados extraídos de la base de datos -->
-            </tbody>
-        </table>
+        </div>
+
     </section>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

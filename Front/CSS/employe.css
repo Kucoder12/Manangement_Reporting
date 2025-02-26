@@ -115,6 +115,55 @@ h2 {
 }
 
 
+/*lista de empleado*/
+
+#project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%
+}
+
+.employe-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    width: 100%;
+    
+}
+
+.employe-card:hover {
+    background-color:antiquewhite
+}
+
+.employe-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.employe-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.employe-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.employe-arrow {
+    font-size: 1.5rem;
+    color: #FF8C00;
+    cursor: pointer;
+}
+
+
 /* Tabla de empleados */
 table {
     width: 100%;
