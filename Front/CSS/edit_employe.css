@@ -15,14 +15,15 @@ body {
 
 /* Encabezado */
 header {
-    background: linear-gradient(135deg, #58D68D, #FF8C00);
+    background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente entre los dos colores */
     color: #fff;
-    padding: 15px 30px;
+    padding: 20px 50px; /* Espaciado más relajado */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
     border-bottom: 4px solid #fff;
+    border-radius: 10px;
 }
 
 /* Logo */
@@ -30,6 +31,9 @@ header .logo {
     font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
+}
+header .logo:hover {
+    transform: scale(1.05); /* Efecto de agrandamiento suave */
 }
 
 /* Barra de navegación */
