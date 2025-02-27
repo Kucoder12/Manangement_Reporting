@@ -5,7 +5,6 @@
     box-sizing: border-box;
 }
 
-/* Estilos globales */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7f7f7;
@@ -13,7 +12,6 @@ body {
     line-height: 1.6;
 }
 
-/* Encabezado */
 header {
     background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente entre los dos colores */
     color: #fff;
@@ -26,22 +24,14 @@ header {
     border-radius: 10px;
 }
 
-/* Logo Good Services */
 header .logo {
     font-size: 2rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
 }
-
 header .logo:hover {
     transform: scale(1.05); /* Efecto de agrandamiento suave */
-}
-
-/* Barra de navegación */
-nav {
-    background: linear-gradient(135deg, #FF8C00, #58D68D); /* Gradiente en la barra de navegación */
-    border-radius: 8px;
 }
 
 nav ul {
@@ -49,7 +39,6 @@ nav ul {
     display: flex;
     gap: 20px;
 }
-
 
 nav ul li a {
     text-decoration: none;
@@ -62,41 +51,6 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #58D68D;
     transform: translateY(-3px);
-}
-
-
-/* Estilos para secciones */
-section {
-    margin: 30px;
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    font-weight: 500;
-    color: #333;
-}
-
-section p {
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.8;
-}
-
-section a {
-    color: #58D68D;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-section a:hover {
-    color: #FF8C00;
-    text-decoration: underline;
 }
 
 /* Estilos del footer */
@@ -139,7 +93,3 @@ footer p {
         padding: 20px;
     }
 }
-
-
-
-
