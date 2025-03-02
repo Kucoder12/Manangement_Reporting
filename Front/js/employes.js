@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     employeName.textContent = `${employes.name} ${employes.lastname}` || "Nombre del empleado No Disponible"; // Validar
 
                     const employeCDI = document.createElement("div");
-                    employeCDI.classList.add("employe-date");
+                    employeCDI.classList.add("employe-role");
                     employeCDI.textContent = `${employes.role|| "Fecha No Disponible"}`; // Validar
 
                     projectInfo.appendChild(employeName);
@@ -39,6 +39,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     projectCard.appendChild(projectArrow);
 
                     projectList.appendChild(projectCard);
+
+                    projectCard.addEventListener("click", () => {
+                        openModal(employes); // Abre el modal con la información del empleado
+                    });
                 });
             } else {
                 console.log("No hay proyectos disponibles o el formato es incorrecto.");
@@ -51,14 +55,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Escuchar la búsqueda de proyectos
-    document.getElementById("searchProject").addEventListener("keyup", function () {
+    document.getElementById("search-input").addEventListener("keyup", function () {
         const input = this.value.toLowerCase();
-        const projectList = document.getElementById("project-list");
-        const projects = projectList.getElementsByClassName("project-card");
+        const projectList = document.getElementById("employes-list");
+        const projects = projectList.getElementsByClassName("employe-card");
 
         Array.from(projects).forEach(project => {
-            const projectName = project.querySelector(".project-name").textContent.toLowerCase();
-            const projectDate = project.querySelector(".project-date").textContent.toLowerCase();
+            const projectName = project.querySelector(".employe-name").textContent.toLowerCase();
+            const projectDate = project.querySelector(".employe-role").textContent.toLowerCase();
 
             // Mostrar u ocultar proyectos según la búsqueda
             if (projectName.includes(input) || projectDate.includes(input)) {
@@ -70,23 +74,43 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 });
 
+//Función para abrir el modal
+function openModal(employe) {
+    let name = employe.name;
+    name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    let lastname = employe.lastname;
+    lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
+    // Usar \n en el texto original y convertirlo en <br>
+    const modalText = `ID: ${employe.id}
+                       Nombre: ${employe.name}
+                       Apellidos:${employe.lastname}
+                       Email: ${employe.email}
+                       Teléfono: ${employe.phone}
+                       Rol: ${employe.role || "Rol no disponible"}`;
+     
+    document.getElementById("employe").innerHTML = name + " " + lastname;
+    // Convertir los saltos de línea \n en <br>
+    document.getElementById("modal-content").innerHTML = modalText.split('\n').join('<br>');
 
-// Función para filtrar los proyectos según la búsqueda
-function searchProjects() {
-    const input = document.getElementById("searchProject").value.toLowerCase();
-    const projectList = document.getElementById("project-list");
-    const projects = projectList.getElementsByClassName("project-card");
 
-    Array.from(projects).forEach(project => {
-        const projectName = project.querySelector(".project-name").textContent.toLowerCase();
-        const projectDate = project.querySelector(".project-date").textContent.toLowerCase();
-
-        // Mostrar u ocultar proyectos según la búsqueda
-        if (projectName.includes(input) || projectDate.includes(input)) {
-            project.style.display = "";
-        } else {
-            project.style.display = "none";
-        }
-    });
+    document.getElementById("modal").style.display = "block";
+    document.getElementById("modal-overlay").style.display = "block";
 }
 
+// Función para cerrar el modal
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("modal-overlay").style.display = "none";
+}
+
+// Cerrar modal al hacer clic fuera de él
+document.addEventListener("DOMContentLoaded", async function () {
+    // Esperar a que el DOM esté cargado antes de agregar eventos
+    const modalOverlay = document.getElementById("modal-overlay");
+
+    if (modalOverlay) {
+        modalOverlay.addEventListener("click", closeModal);
+    } else {
+        console.error("Error: No se encontró el elemento modal-overlay");
+    }
+});

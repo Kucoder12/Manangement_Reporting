@@ -71,24 +71,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-// Función para filtrar los proyectos según la búsqueda
-function searchProjects() {
-    const input = document.getElementById("searchProject").value.toLowerCase();
-    const projectList = document.getElementById("project-list");
-    const projects = projectList.getElementsByClassName("project-card");
 
-    Array.from(projects).forEach(project => {
-        const projectName = project.querySelector(".project-name").textContent.toLowerCase();
-        const projectDate = project.querySelector(".project-date").textContent.toLowerCase();
-
-        // Mostrar u ocultar proyectos según la búsqueda
-        if (projectName.includes(input) || projectDate.includes(input)) {
-            project.style.display = "";
-        } else {
-            project.style.display = "none";
-        }
-    });
-}
 
 
 

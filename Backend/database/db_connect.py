@@ -69,6 +69,10 @@ class Connection_Database():
         cur=self.conn.cursor()
         cur.execute(f"""DELETE FROM employe WHERE cdi = '{cdi}'""")
         self.conn.commit()
+    
+    async def update_employe(self, id_employe:int, field:str, value:str):
+        cur =self.conn.cursor()
+        cur.execute(f"""UPDATE employes SET {field}='{value}' WHERE id={id_employe}""")
         
 # -------------- PROJECTS ----------------
 

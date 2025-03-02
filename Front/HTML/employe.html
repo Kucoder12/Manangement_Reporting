@@ -24,6 +24,11 @@
             });
         }
     </script>
+    <head>
+        <!-- Incluir Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    </head>
+    
 </head>
 <body>
     <header>
@@ -49,6 +54,15 @@
         <div id="employes-list">
 
         </div>
+
+            <!-- Modal -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    <div id="modal" class="modal">
+        <h3 id="employe">Detalles del Empleado</h3>
+        <p id="modal-content"></p>
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+    
 
     </section>
     <script>
@@ -78,6 +92,8 @@
                 });
             });
         });
+
+
     </script>
     
 

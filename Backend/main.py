@@ -30,11 +30,12 @@ async def validateLogin(username:Annotated[str, Form()], password:Annotated[str,
     
     return {'message':'Las contraseñas coinciden'}
         
-    
+#----------------------- EMPLOYES ------------------------
+ 
 @myapp.get('/employes',tags=['Users'])
 async def get_employes(database=Depends(get_db)):
     data= await database.get_employes()
-    employes = [{'cdi':user[1],'name':user[2],'lastname':user[3],'email':user[4], 'phone':user[5],'role':user[6]} for user in data]
+    employes = [{'id':user[0],'cdi':user[1],'name':user[2],'lastname':user[3],'email':user[4], 'phone':user[5],'role':user[6]} for user in data]
 
     return employes
 
@@ -62,13 +63,24 @@ async def new_user(cdi:Annotated[str, Form()],
     
     return {"message":f'{password_employe}'}
 
-@myapp.post('employes/{employe_cdi}/delete')
+@myapp.delete('employes/{employe_cdi}/delete', tags=['Users'])
 async def delete_employe(employe_cdi:str, database=Depends(get_db)):
     try:
         await database.delete_employe(employe_cdi)
         return {'message':'Se ha eliminado correctamente'}
     except:
         return {'message':'Ha habido un error al eliminar el empleado'}
+    
+@myapp.put('/employes/{employe_name}/{field}/{value}/update', tags=['Users'])
+async def update_employe(id_employe:int, field:str,value:str, db=Depends(get_db)):
+    try:
+        await db.update_employe(id_employe,field,value)
+        return {'message':'Se ha actualizado correctamente.'}
+        
+    except:
+        return {'message':'Ha habido un error.'}
+
+# ------------------------- PROJECTS ----------------------------
 
 
 @myapp.get('/projects', tags=['Projects'])
@@ -112,7 +124,7 @@ async def add_project(name:Annotated[str, Form()],
     await database.add_project(name,address,description,start_date,end_date,state,employe_name)
     return {'message':'Se ha creado creado correctamente el proyecto'}
 
-@myapp.post('/projects/{project_name}/delete')
+@myapp.delete('/projects/{project_name}/delete')
 async def delete_project(project_name:str, database=Depends(get_db)):
     try:
         await database.delete_project(project_name)
