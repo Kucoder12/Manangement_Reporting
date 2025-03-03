@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapports Administratifs</title>
+    <link rel="stylesheet" href="../css/weekly-report.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Good Services</div>
+        <nav>
+            <ul>
+                <li><a href="Admin_responsable.html">Accueil</a></li>
+                <li><a>Employés</a></li>
+                <li><a href="chantier_responsable.html">Chantier</a></li>
+                <li><a href="weekly_report_responsable.html">Rapport hebdomadaire</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <h2>Calendrier des Rapports</h2>
+        <div class="calendar-controls">
+            <button onclick="changeMonth(-1)">◄ Mois précédent</button>
+            <span id="current-month"></span>
+            <button onclick="changeMonth(1)">Mois suivant ►</button>
+        </div>
+        <div id="calendar"></div>
+        
+        <div class="report-actions">
+            <a href="create-daily-report.html"><button>Créer un rapport quotidien (Responsable)</button></a>
+        </div>
+        
+        <div class="search-container">
+            <h3>Rechercher un Rapport</h3>
+            <input type="text" id="search-input" placeholder="Rechercher par date ou contenu..." onkeyup="searchReports()">
+            <ul id="search-results"></ul>
+        </div>
+    </main>
+
+    <script>
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+        let reports = {};
+
+        function updateMonthDisplay() {
+            document.getElementById("current-month").textContent = `${months[currentMonth]} ${currentYear}`;
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateMonthDisplay();
+            generateCalendar();
+        }
+
+        function generateCalendar() {
+            const calendarContainer = document.getElementById("calendar");
+            calendarContainer.innerHTML = "";
+            
+            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            firstDay = firstDay === 0 ? 7 : firstDay;
+            
+            let table = "<table class='calendar-table'><thead><tr>";
+            const daysOfWeek = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+            daysOfWeek.forEach(day => table += `<th>${day}</th>`);
+            table += "</tr></thead><tbody><tr>";
+
+            for (let i = 1; i < firstDay; i++) {
+                table += "<td></td>";
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                if ((firstDay + day - 2) % 7 === 0 && day !== 1) {
+                    table += "</tr><tr>";
+                }
+                let reportText = reports[`${currentYear}-${currentMonth + 1}-${day}`] || "";
+                table += `<td id='day-${day}' onclick='viewReport(${day})'>${day}<br><span class='report-text'>${reportText}</span></td>`;
+            }
+            
+            table += "</tr></tbody></table>";
+            calendarContainer.innerHTML = table;
+        }
+
+        function viewReport(day) {
+            let reportKey = `${currentYear}-${currentMonth + 1}-${day}`;
+            alert(reports[reportKey] || "Aucun rapport pour ce jour");
+        }
+
+        function searchReports() {
+            let query = document.getElementById("search-input").value.toLowerCase();
+            let resultsContainer = document.getElementById("search-results");
+            resultsContainer.innerHTML = "";
+            
+            Object.keys(reports).forEach(key => {
+                if (reports[key].toLowerCase().includes(query)) {
+                    let li = document.createElement("li");
+                    li.textContent = `${key}: ${reports[key]}`;
+                    resultsContainer.appendChild(li);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateMonthDisplay();
+            generateCalendar();
+        });
+    </script>
+    <footer>
+        <p>&copy; 2025 Good Services. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
