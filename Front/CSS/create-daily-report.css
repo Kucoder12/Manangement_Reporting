@@ -62,11 +62,12 @@ header .logo:hover {
     font-size: 14px;
 }
 
-/* Barra de navegación */
+/* Estilos para la navegación */
 nav ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
+    margin-left: -700px; /* Mover los elementos de navegación más a la izquierda */
 }
 
 nav ul li {

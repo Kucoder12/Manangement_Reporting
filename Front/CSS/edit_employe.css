@@ -36,11 +36,12 @@ header .logo:hover {
     transform: scale(1.05); /* Efecto de agrandamiento suave */
 }
 
-/* Barra de navegación */
+/* Estilos para la navegación */
 nav ul {
-    list-style: none;
+    list-style-type: none;
     display: flex;
     gap: 20px;
+    margin-left: -700px; /* Mover los elementos de navegación más a la izquierda */
 }
 
 nav ul li a {

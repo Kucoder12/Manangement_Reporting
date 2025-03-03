@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Estilos globales */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7f7f7;
@@ -12,6 +13,7 @@ body {
     line-height: 1.6;
 }
 
+/* Encabezado */
 header {
     background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente entre los dos colores */
     color: #fff;
@@ -24,20 +26,30 @@ header {
     border-radius: 10px;
 }
 
+/* Logo Good Services */
 header .logo {
     font-size: 2rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
 }
+
 header .logo:hover {
     transform: scale(1.05); /* Efecto de agrandamiento suave */
 }
 
+/* Barra de navegación */
+nav {
+    background: linear-gradient(135deg, #FF8C00, #58D68D); /* Gradiente en la barra de navegación */
+    border-radius: 8px;
+}
+
+/* Aplicamos margen a la lista de navegación */
 nav ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
+    margin-left: -650px; /* Mover los elementos de navegación más a la izquierda */
 }
 
 nav ul li a {

@@ -44,12 +44,13 @@ nav {
     border-radius: 8px;
 }
 
+/* Aplicamos margen a la lista de navegación */
 nav ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
+    margin-left: -650px; /* Mover los elementos de navegación más a la izquierda */
 }
-
 
 nav ul li a {
     text-decoration: none;
@@ -139,6 +140,8 @@ footer p {
         padding: 20px;
     }
 }
+
+
 
 
 

@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Estilos globales */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7f7f7;
@@ -12,6 +13,7 @@ body {
     line-height: 1.6;
 }
 
+/* Encabezado */
 header {
     background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente entre los dos colores */
     color: #fff;
@@ -24,20 +26,30 @@ header {
     border-radius: 10px;
 }
 
+/* Logo Good Services */
 header .logo {
     font-size: 2rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
 }
+
 header .logo:hover {
     transform: scale(1.05); /* Efecto de agrandamiento suave */
 }
 
+/* Barra de navegación */
+nav {
+    background: linear-gradient(135deg, #FF8C00, #58D68D); /* Gradiente en la barra de navegación */
+    border-radius: 8px;
+}
+
+/* Aplicamos margen a la lista de navegación */
 nav ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
+    margin-left: -650px; /* Mover los elementos de navegación más a la izquierda */
 }
 
 nav ul li a {
@@ -53,11 +65,11 @@ nav ul li a:hover {
     transform: translateY(-3px);
 }
 
-/* Estilos del footer */
+/* Styles du footer */
 footer {
     text-align: center;
     padding: 15px;
-    background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente de pie de página */
+    background: linear-gradient(135deg, #58D68D, #FF8C00);
     color: #fff;
     position: fixed;
     width: 100%;
@@ -71,7 +83,7 @@ footer p {
     margin: 0;
 }
 
-/* Adaptación para pantallas pequeñas */
+/* Responsivité */
 @media screen and (max-width: 768px) {
     header {
         flex-direction: column;
@@ -82,14 +94,149 @@ footer p {
         flex-direction: column;
         align-items: center;
     }
-
-    nav ul li a {
-        padding: 12px 25px;
-        margin: 5px 0;
-    }
-
-    section {
-        margin: 20px;
-        padding: 20px;
-    }
 }
+
+/* Interface professionnelle et moderne pour la gestion des projets */
+.container {
+    display: flex;
+    width: 85%;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.sidebar {
+    width: 30%;
+    background: linear-gradient(135deg, #58D68D, #FF8C00);
+    color: white;
+    padding: 30px;
+    border-radius: 12px 0 0 12px;
+    backdrop-filter: blur(5px);
+    opacity: 10; /* Ajusta el nivel de opacidad */
+}
+
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(3px);
+}
+
+.sidebar ul li:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 30px;
+    background: white;
+    color: #2c3e50;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.sidebar button:hover {
+    background: #ecf0f1;
+}
+
+.content {
+    flex: 1;
+    padding: 35px;
+    background: rgba(247, 247, 247, 0.8);
+    border-radius: 0 12px 12px 0;
+    backdrop-filter: blur(5px);
+}
+
+.content h2 {
+    margin-bottom: 20px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #2c3e50;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+}
+
+button {
+    padding: 14px 20px;
+    background: #58D68D;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; /* 🔹 Bordes más redondeados */
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    margin-top: 10px; /* 🔹 Espaciado superior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 🔹 Sombra suave */
+}
+
+button:hover {
+    background: #58D68D;
+}
+
+/* Estilo del área de carga */
+.upload-area {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border: 2px dashed #4CAF50;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Cambia el color al arrastrar un archivo encima */
+.upload-area.dragover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #2E7D32;
+}
+.upload-area p {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+
+/* Muestra el nombre del archivo seleccionado */
+.file-name {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Ocultar input file original */
+.upload-area input {
+    display: none;
+}
+
+
