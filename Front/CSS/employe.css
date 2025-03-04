@@ -208,8 +208,27 @@ h2 {
     font-family: 'Roboto', sans-serif; /* Fuente moderna */
 }
 
+#modal-content div {
+    margin-bottom: 10px;
+    display: flex; /* Usamos flexbox para organizar los elementos */
+
+    align-items: center; /* Alinea los elementos verticalmente */
+}
+
+#modal-content i.edit-icon {
+    margin-left: auto;
+    cursor: pointer;
+    color: #4CAF50;  /* Cambiar el color del ícono */
+    font-size: 18px;  /* Ajustar el tamaño del ícono */
+}
+
+#modal-content i.edit-icon:hover {
+    color: #45a049;  /* Cambiar el color cuando el mouse está sobre el ícono */
+}
+
+
 /* Estilo del botón de cierre */
-.close-btn {
+.close-btn, .delete-btn, .update-btn {
     background: #58D68D;
     color: white;
     cursor: pointer;
@@ -221,33 +240,8 @@ h2 {
     transition: background 0.3s ease, transform 0.3s ease; /* Efectos suaves */
 }
 
-/* Estilo para el título del modal (Nombre del empleado) */
-.modal #modal-name-title {
-    font-size: 1.8rem;  /* Tamaño grande para el nombre */
-    font-weight: bold;
-    color: #333;  /* Color oscuro para el nombre */
-    margin-bottom: 15px;
-    text-align: center;  /* Centrado */
-    text-transform: capitalize;  /* Capitaliza la primera letra */
-}
 
-/* Estilo para los títulos de los campos dentro del modal */
-.modal .field-label {
-    font-weight: bold;  /* Pone en negrita */
-    font-size: 1.1rem;   /* Ajusta el tamaño si es necesario */
-    color: #333;         /* Color oscuro para los títulos */
-    margin-bottom: 5px;  /* Espacio debajo del título */
-    display: block;      /* Para que se muestre en una nueva línea */
-}
-
-/* Estilo para los valores de los campos */
-.modal .field-value {
-    font-size: 1rem;
-    color: #555;         /* Color más suave para los valores */
-    margin-bottom: 15px; /* Espacio entre los valores */
-}
-
-.close-btn:hover {
+.close-btn:hover, .delete-btn:hover, .update-btn:hover {
     background-color: #FF8C00;
 }
 
@@ -289,6 +283,22 @@ h2 {
     color: #FF8C00;
     cursor: pointer;
 }
+
+/*Formulario para actualizar empleado*/
+
+#dynamic-form {
+    margin-top: 20px
+}
+
+#modal-content{
+    font-size: 20px;
+}
+
+#modal-content strong {
+    font-weight: bold; /* Pone el texto en negrita */
+    color: #333; /* Opcional: cambia el color a un tono oscuro */
+}
+
 
 
 /* Tabla de empleados */

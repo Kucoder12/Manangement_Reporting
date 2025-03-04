@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Services - Employés</title>
     <link rel="stylesheet" href="../css/employe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="./../js/employes.js"></script>
     <script>
         function searchEmployee() {
@@ -59,8 +60,12 @@
     <div id="modal-overlay" class="modal-overlay"></div>
     <div id="modal" class="modal">
         <h3 id="employe">Detalles del Empleado</h3>
-        <p id="modal-content"></p>
+        <div id="modal-content"></div>
+        <button class="delete-btn" onclick="deleteModal()">Eliminar</button>
+        <button class="update-btn" onclick="deleteModal()">Actualizar</button>
         <button class="close-btn" onclick="closeModal()">Cerrar</button>
+
+        
     </div>
     
 

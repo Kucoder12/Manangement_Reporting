@@ -39,11 +39,21 @@ document.addEventListener("DOMContentLoaded", async function () {
                     projectCard.appendChild(projectArrow);
 
                     projectList.appendChild(projectCard);
-
+                    
                     projectCard.addEventListener("click", () => {
                         openModal(employes); // Abre el modal con la información del empleado
+                        document.querySelector(".delete-btn").addEventListener('click', ()=> {
+                            deleteModal(employes);
+                        });
+                        })
+                        document.querySelector(".update-btn").addEventListener('click', ()=>{
+                            updatefieldModal();
+                        })
                     });
-                });
+
+
+
+                
             } else {
                 console.log("No hay proyectos disponibles o el formato es incorrecto.");
             }
@@ -72,29 +82,149 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
     });
+
 });
+
+//funcion para eliminar empleado a traves del modal
+
+function deleteModal(employe){
+    let cdi = employe.cdi
+    fetch('http://localhost:8000/employes/' + cdi + '/delete', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al eliminar el recurso');
+        }
+        window.location.href = window.location.href;
+        return response.json();
+        
+
+    })
+
+}
+
+//funcion para actualizar algun campo del empleado
+async function updatefieldModal() {
+    // Verificar si hay un campo en edición
+    const input = document.querySelector("input[type='text']");
+    if (!input) {
+        alert("No hay campos en edición");
+        return;
+    }
+
+    const fieldId = input.id; // Obtener el ID del campo que se editó
+    const newValue = input.value.trim(); // Obtener el nuevo valor
+
+    if (!newValue) {
+        alert("El campo no puede estar vacío");
+        return;
+    }
+
+    // Crear el objeto de datos para enviar al backend
+    const requestData = {
+        value: newValue
+    };
+
+    try {
+        // Hacer la petición PUT al backend
+        const response = await fetch(`/employes/${fieldId}/update`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al actualizar el campo");
+        }
+
+        // Convertir el input de vuelta a un span con el nuevo valor
+        const span = document.createElement("span");
+        span.id = fieldId;
+        span.textContent = newValue;
+
+        input.parentNode.replaceChild(span, input);
+
+        alert("Campo actualizado correctamente");
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+
+function editField(fieldId, spanElement) {
+    // Obtener el valor actual del campo
+    const currentValue = spanElement.textContent;
+
+    // Crear el input de texto
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = fieldId;
+    input.name = fieldId;
+    input.value = currentValue;  // Asignar el valor actual del campo al input
+
+    // Reemplazar el span con el input
+    spanElement.innerHTML = '';  // Limpiar el contenido del span
+    spanElement.appendChild(input);  // Añadir el input al div
+
+    // Opcional: Si quieres que el campo se enfoque cuando sea editable
+    input.focus();
+}
 
 //Función para abrir el modal
 function openModal(employe) {
-    let name = employe.name;
-    name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-    let lastname = employe.lastname;
-    lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
-    // Usar \n en el texto original y convertirlo en <br>
-    const modalText = `ID: ${employe.id}
-                       Nombre: ${employe.name}
-                       Apellidos:${employe.lastname}
-                       Email: ${employe.email}
-                       Teléfono: ${employe.phone}
-                       Rol: ${employe.role || "Rol no disponible"}`;
-     
+    let name = employe.name.charAt(0).toUpperCase() + employe.name.slice(1).toLowerCase();
+    let lastname = employe.lastname.charAt(0).toUpperCase() + employe.lastname.slice(1).toLowerCase();
+
+    const modalContent = document.getElementById("modal-content");
+    modalContent.innerHTML = '';  // Limpiar contenido previo
+
+    const data = [
+        { label: "ID", value: employe.id, id: "id", editable: false },
+        { label: "CDI", value: employe.cdi, id: "cdi", editable: true },
+        { label: "Email", value: employe.email, id: "email", editable: true },
+        { label: "Teléfono", value: employe.phone, id: "phone", editable: true },
+        { label: "Rol", value: employe.role || "Rol no disponible", id: "role", editable: true }
+    ];
+
+    data.forEach(item => {
+        const div = document.createElement("div");
+
+        const label = document.createElement("strong");
+        label.textContent = item.label + ": ";
+        label.id = item.id;
+
+        const value = document.createElement("span");
+        value.textContent = item.value;
+        value.id = `span-${item.id}`;
+
+        if (item.editable) {
+            const editIcon = document.createElement("i");
+            editIcon.classList.add("fas", "fa-edit", "edit-icon");
+            editIcon.onclick = function () {
+                editField(item.id, value);
+            };
+
+            div.appendChild(label);
+            div.appendChild(value);
+            div.appendChild(editIcon);
+        } else {
+            div.appendChild(label);
+            div.appendChild(value);
+        }
+
+        modalContent.appendChild(div);
+    });
+
     document.getElementById("employe").innerHTML = name + " " + lastname;
-    // Convertir los saltos de línea \n en <br>
-    document.getElementById("modal-content").innerHTML = modalText.split('\n').join('<br>');
-
-
     document.getElementById("modal").style.display = "block";
     document.getElementById("modal-overlay").style.display = "block";
+
 }
 
 // Función para cerrar el modal
