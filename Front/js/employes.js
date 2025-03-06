@@ -44,12 +44,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                         openModal(employes); // Abre el modal con la información del empleado
                         document.querySelector(".delete-btn").addEventListener('click', ()=> {
                             deleteModal(employes);
-                        });
-                        })
-                        document.querySelector(".update-btn").addEventListener('click', ()=>{
-                            updatefieldModal();
-                        })
+                        });                      
+                        
                     });
+                });
 
 
 
@@ -85,97 +83,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 });
 
-//funcion para eliminar empleado a traves del modal
-
-function deleteModal(employe){
-    let cdi = employe.cdi
-    fetch('http://localhost:8000/employes/' + cdi + '/delete', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al eliminar el recurso');
-        }
-        window.location.href = window.location.href;
-        return response.json();
-        
-
-    })
-
-}
-
-//funcion para actualizar algun campo del empleado
-async function updatefieldModal() {
-    // Verificar si hay un campo en edición
-    const input = document.querySelector("input[type='text']");
-    if (!input) {
-        alert("No hay campos en edición");
-        return;
-    }
-
-    const fieldId = input.id; // Obtener el ID del campo que se editó
-    const newValue = input.value.trim(); // Obtener el nuevo valor
-
-    if (!newValue) {
-        alert("El campo no puede estar vacío");
-        return;
-    }
-
-    // Crear el objeto de datos para enviar al backend
-    const requestData = {
-        value: newValue
-    };
-
-    try {
-        // Hacer la petición PUT al backend
-        const response = await fetch(`/employes/${fieldId}/update`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(requestData)
-        });
-
-        if (!response.ok) {
-            throw new Error("Error al actualizar el campo");
-        }
-
-        // Convertir el input de vuelta a un span con el nuevo valor
-        const span = document.createElement("span");
-        span.id = fieldId;
-        span.textContent = newValue;
-
-        input.parentNode.replaceChild(span, input);
-
-        alert("Campo actualizado correctamente");
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-
-function editField(fieldId, spanElement) {
-    // Obtener el valor actual del campo
-    const currentValue = spanElement.textContent;
-
-    // Crear el input de texto
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = fieldId;
-    input.name = fieldId;
-    input.value = currentValue;  // Asignar el valor actual del campo al input
-
-    // Reemplazar el span con el input
-    spanElement.innerHTML = '';  // Limpiar el contenido del span
-    spanElement.appendChild(input);  // Añadir el input al div
-
-    // Opcional: Si quieres que el campo se enfoque cuando sea editable
-    input.focus();
-}
-
 //Función para abrir el modal
 function openModal(employe) {
     let name = employe.name.charAt(0).toUpperCase() + employe.name.slice(1).toLowerCase();
@@ -192,6 +99,8 @@ function openModal(employe) {
         { label: "Rol", value: employe.role || "Rol no disponible", id: "role", editable: true }
     ];
 
+    const id_employe = data[0].value;    //me coge el ID del empleado que seleccione (abra el modal)
+
     data.forEach(item => {
         const div = document.createElement("div");
 
@@ -201,13 +110,14 @@ function openModal(employe) {
 
         const value = document.createElement("span");
         value.textContent = item.value;
-        value.id = `span-${item.id}`;
+        value.id = `${item.id}`;
 
         if (item.editable) {
             const editIcon = document.createElement("i");
             editIcon.classList.add("fas", "fa-edit", "edit-icon");
             editIcon.onclick = function () {
-                editField(item.id, value);
+                editField(item.id, value, id_employe);  // Pasar employe_id al hacer clic en el icono
+                console.log(item.id,value,id_employe);
             };
 
             div.appendChild(label);
@@ -244,3 +154,91 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Error: No se encontró el elemento modal-overlay");
     }
 });
+
+function editField(fieldId, spanElement, id_employe) {
+    const id = id_employe
+   // Obtener el valor actual del campo
+   //const currentValue = spanElement.textContent;
+
+   // Crear el input de texto
+   const input = document.createElement("input");
+   input.type = "text";
+   input.id = fieldId;
+   input.name = fieldId;
+   //input.value = currentValue;  // Asignar el valor actual del campo al input
+   // Reemplazar el span con el input
+   spanElement.innerHTML = ' ';  // Limpiar el contenido del span
+   spanElement.appendChild(input);  // Añadir el input al div
+   // Opcional: Si quieres que el campo se enfoque cuando sea editable
+   input.focus();
+
+   const update = document.querySelector(".update-btn");
+   update.onclick = function (){
+       updatefieldModal(fieldId,input,id);
+   }
+
+}
+
+//funcion para actualizar algun campo del empleado
+async function updatefieldModal(fieldId, input, employe_id) {
+    const newValue = input.value.trim();  // Obtener el nuevo valor del input
+    console.log(newValue, fieldId,employe_id);
+
+    if (!newValue) {
+        alert("El campo no puede estar vacío");
+        return;
+    }
+
+    try {
+        // Hacer la petición PUT al backend con employe_id
+        const response = await fetch(`http://localhost:8000/employes/${employe_id}/${fieldId}/${newValue}/update`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            //body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json(); // Intentar leer la respuesta JSON
+        console.log("Respuesta del servidor:", result); // Verificar la respuesta del backend
+
+
+        if (!response.ok) {
+            throw new Error("Error al actualizar el campo");
+        }
+
+        // Convertir el input de vuelta a un span con el nuevo valor
+        const span = document.createElement("span");
+        span.id = `span-${fieldId}`;
+        span.textContent = newValue;
+
+        input.parentNode.replaceChild(span, input);
+
+        alert("Campo actualizado correctamente");
+    } catch (error) {
+        alert("Primero debe seleccionar un campo para editar y asignarle el nuevo valor.");
+    }
+}
+
+
+//funcion para eliminar empleado a traves del modal
+
+function deleteModal(employe){
+    let cdi = employe.cdi
+    fetch('http://localhost:8000/employes/' + cdi + '/delete', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al eliminar el recurso');
+        }
+        window.location.href = window.location.href;
+        return response.json();
+        
+
+    })
+
+}

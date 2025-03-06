@@ -71,7 +71,7 @@ async def delete_employe(employe_cdi:str, database=Depends(get_db)):
     except:
         return {'message':'Ha habido un error al eliminar el empleado'}
     
-@myapp.put('/employes/{id_employe}/{field}/update', tags=['Users'])
+@myapp.put('/employes/{id_employe}/{field}/{value}/update', tags=['Users'])
 async def update_employe(id_employe:int, field:str,value:str, db=Depends(get_db)):
     try:
         await db.update_employe(id_employe,field,value)

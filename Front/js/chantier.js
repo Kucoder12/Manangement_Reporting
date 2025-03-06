@@ -39,6 +39,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                     projectCard.appendChild(projectArrow);
 
                     projectList.appendChild(projectCard);
+
+                    projectCard.addEventListener("click", ()=>{
+                        const projectName = project.name;
+                        localStorage.setItem("projectName",projectName);
+                        console.log(projectName);
+                        window.open("./../html/getInfo_project.html");
+                    })
                 });
             } else {
                 console.log("No hay proyectos disponibles o el formato es incorrecto.");
@@ -55,11 +62,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         const input = this.value.toLowerCase();
         const projectList = document.getElementById("project-list");
         const projects = projectList.getElementsByClassName("project-card");
-
+    
         Array.from(projects).forEach(project => {
             const projectName = project.querySelector(".project-name").textContent.toLowerCase();
             const projectDate = project.querySelector(".project-date").textContent.toLowerCase();
-
+    
             // Mostrar u ocultar proyectos según la búsqueda
             if (projectName.includes(input) || projectDate.includes(input)) {
                 project.style.display = "";
@@ -69,7 +76,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     });
 });
-
 
 
 
