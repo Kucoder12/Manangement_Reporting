@@ -1,5 +1,6 @@
 // Espera hasta que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", function() {
+    create_option_form()
     // Ahora puedes agregar el evento al formulario
     document.getElementById("projectForm").addEventListener("submit", async function(event) {
         event.preventDefault(); // Evita que se recargue la página
@@ -34,3 +35,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+async function create_option_form(){
+   const managers_form = document.getElementById("employe_name");
+
+   try{
+        const response = await fetch("http://localhost:8000/employes/role/managers");
+        if (response.ok){
+
+            const managers = await response.json();
+            console.log(managers);
+            managers.forEach(manager => {
+                const option = document.createElement("option");
+                //option.value = manager[0].name + " " + manager[0].last_name;
+                option.value = `${manager.id}`;
+                option.textContent = `${manager.name}` + " " + `${manager.lastname}`;
+                managers_form.appendChild(option);
+            });
+
+        }
+        
+   } catch(error){
+        console.log("Error de conexión: " + error)
+   }
+};

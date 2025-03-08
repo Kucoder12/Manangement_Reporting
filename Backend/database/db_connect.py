@@ -52,6 +52,13 @@ class Connection_Database():
        employes=cur.fetchall()
        
        return employes 
+   
+    async def get_employes_managers(self):
+        cur = self.conn.cursor()
+        cur.execute("""SELECT Employes.id, Employes.name, Employes.last_name FROM Employes WHERE role='manager'""")
+        managers = cur.fetchall()
+        
+        return managers
          
     async def add_employe(self, cdi:str, name:str, lastname:str, email:str, phone:int, role:str):
         cur = self.conn.cursor()
@@ -79,14 +86,19 @@ class Connection_Database():
 
     async def get_projects(self):
         cur=self.conn.cursor()
-        cur.execute(f"""SELECT * FROM Project""")
+        cur.execute(f"""SELECT Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe
+                        FROM Project JOIN employes 
+                        ON Project.id_user = employes.id""")
         projects=cur.fetchall()
         
         return projects
     
     async def get_project_name(self, project_name:str): 
         cur=self.conn.cursor()
-        cur.execute(f"""SELECT * FROM Project WHERE name='{project_name}'""")
+        cur.execute(f"""SELECT Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe 
+                    FROM Project JOIN employes 
+                    ON Project.id_user = employes.id
+                    WHERE name='{project_name}'""")
         project=cur.fetchone()
         
         return project

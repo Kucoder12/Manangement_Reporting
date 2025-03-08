@@ -11,26 +11,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 async function getInfo_project(){
-    const valor = localStorage.getItem("projectName");
+    const project_name = localStorage.getItem("projectName");
 
-    if (valor) {
-        console.log("Valor recuperado:", valor);  // Mostrar el valor en consola
+    if (project_name) {
+        console.log("project_name recuperado:", project_name);  // Mostrar el project_name en consola
     } else {
-        console.log("No se encontró el valor.");
+        console.log("No se encontró el project_name.");
     }
 
     try {
-        const response = await fetch(`http://localhost:8000/projects/${valor}`);
+        const response = await fetch(`http://localhost:8000/projects/${project_name}`);
         if (response.ok){
             const project = await response.json();
             document.getElementById("projectName").innerHTML = project[0].name;
             const data_project = [
                 { label: "Name", value: project[0].name, id: "name"},
                 { label: "Address", value: project[0].address, id: "address"},
-                { label: "Description", value: project[0].description, id: "description"},
                 { label: "Start date", value: project[0].start_date, id: "start_date"},
                 { label: "End date", value: project[0].end_date, id: "end_date"},
-                { label: "Employe", value: project[0].employe || "Employe no disponible", id: "employe"}
+                { label: "Responsable", value: project[0].employe || "Employe no disponible", id: "employe"}
             ];
 
             data_project.forEach(item => {
@@ -50,6 +49,7 @@ async function getInfo_project(){
                 project_details.appendChild(div);
                 
             });
+            document.getElementById("descriptionProject").innerHTML = project[0].description;
         }
         
     } catch (error) {

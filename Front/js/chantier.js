@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         const projectName = project.name;
                         localStorage.setItem("projectName",projectName);
                         console.log(projectName);
-                        window.open("./../html/getInfo_project.html");
+                        window.location.href = "./../html/getInfo_project.html";
                     })
                 });
             } else {

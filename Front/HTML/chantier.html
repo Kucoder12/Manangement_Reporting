@@ -6,7 +6,7 @@
     <title>Gestion des Projets</title>
     <link rel="stylesheet" href="../css/chantier.css">
     <script src="./../js/chantier.js"></script>
-    <script src="./../js/getInfo_project.js"></script>
+
 </head>
 <body>
     <header>
@@ -35,9 +35,6 @@
             
         </section>
     </main>
-    <tbody id="projectTableBody">
-        <!-- Aquí estarán los empleados extraídos de la base de datos -->
-    </tbody>
 
     <script>
          function openProjectCreation() {
@@ -67,22 +64,6 @@
                 rows[i].style.display = found ? "" : "none";
             }
         }
-    </script>
-    <script>
-        function openProjectCreation() {
-            window.open("create_project.html", "_blank");
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const rows = document.querySelectorAll("#projectTableBody tr");
-
-            rows.forEach(row => {
-                row.addEventListener("click", function () {
-                    const projectName = row.cells[0].innerText;
-                    window.open(`project_details.html?project=${encodeURIComponent(projectName)}`, "_blank");
-                });
-            });
-        });
     </script>
     <footer>
         <p>&copy; 2025 Good Services. Tous droits réservés.</p>

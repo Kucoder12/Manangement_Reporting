@@ -46,6 +46,13 @@ async def get_employes_name(name: str, database=Depends(get_db)):
 
     return employes
 
+@myapp.get('/employes/role/managers', tags=['Users'])
+async def get_managers(database = Depends(get_db)):
+    data = await database.get_employes_managers()
+    managers = [{'id':manager[0],'name':manager[1],'lastname':manager[2]} for manager in data]
+    
+    return managers
+
 @myapp.post('/employes/add', tags=['Users'])
 async def new_user(cdi:Annotated[str, Form()],
                    name:Annotated[str, Form()], 
@@ -86,13 +93,13 @@ async def update_employe(id_employe:int, field:str,value:str, db=Depends(get_db)
 @myapp.get('/projects', tags=['Projects'])
 async def get_projects(database=Depends(get_db)):
     data=await database.get_projects()
-    projects=[{'name':project[1],
-               'address':project[2],
-               'description':project[3],
-               'start_date':project[4],
-               'end_date':project[5],
-               'state':project[6],
-               'employe':project[7]}
+    projects=[{'name':project[0],
+               'address':project[1],
+               'description':project[2],
+               'start_date':project[3],
+               'end_date':project[4],
+               'state':project[5],
+               'employe':project[6]}
                for project in data]
     
     return projects
@@ -100,13 +107,13 @@ async def get_projects(database=Depends(get_db)):
 @myapp.get('/projects/{name}', tags=['Projects'])
 async def get_projects(name:str,database=Depends(get_db)):
     data = await database.get_project_name(name)
-    project=[{'name':data[1],
-               'address':data[2],
-               'description':data[3],
-               'start_date':data[4],
-               'end_date':data[5],
-               'state':data[6],
-               'employe':data[7]}
+    project=[{'name':data[0],
+               'address':data[1],
+               'description':data[2],
+               'start_date':data[3],
+               'end_date':data[4],
+               'state':data[5],
+               'employe':data[6]}
                ]
     
     return project
