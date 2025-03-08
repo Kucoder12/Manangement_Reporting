@@ -71,6 +71,14 @@ nav ul li a:hover {
     width: 400px;
     text-align: center;
     margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -78,11 +86,13 @@ h1 {
     color: #333;
     font-weight: 600;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 label {
@@ -90,7 +100,8 @@ label {
     font-weight: bold;
     color: #555;
     margin-top: 10px;
-    text-align: left;
+    text-align: center;
+    display: block;
 }
 
 input, textarea {
@@ -101,6 +112,7 @@ input, textarea {
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    text-align: center;
 }
 
 input:focus, textarea:focus {
@@ -126,4 +138,22 @@ button {
 
 button:hover {
     background-color: #58D68D;
+}
+
+/* Estilos del footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #58D68D, #FF8C00); /* Gradiente de pie de página */
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 3px solid #fff;
+}
+
+footer p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
 }
