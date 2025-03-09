@@ -65,6 +65,50 @@ nav ul li a:hover {
     transform: translateY(-3px);
 }
 
+
+#report-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%
+}
+
+.report-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    width: 100%;
+    
+}
+
+.report-card:hover {
+    background-color:antiquewhite
+}
+
+.report-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.report-arrow {
+    font-size: 1.5rem;
+    color: #FF8C00;
+    cursor: pointer;
+}
+
+
+
 /* Styles du footer */
 footer {
     text-align: center;

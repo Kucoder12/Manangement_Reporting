@@ -86,7 +86,7 @@ class Connection_Database():
 
     async def get_projects(self):
         cur=self.conn.cursor()
-        cur.execute(f"""SELECT Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe
+        cur.execute(f"""SELECT Project.id, Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe, employes.last_name
                         FROM Project JOIN employes 
                         ON Project.id_user = employes.id""")
         projects=cur.fetchall()
@@ -95,15 +95,15 @@ class Connection_Database():
     
     async def get_project_name(self, project_name:str): 
         cur=self.conn.cursor()
-        cur.execute(f"""SELECT Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe 
+        cur.execute(f"""SELECT Project.id, Project.name, Project.address, Project.description, Project.start_date, Project.end_date, Project.state, employes.name  AS employe, employes.last_name
                     FROM Project JOIN employes 
                     ON Project.id_user = employes.id
-                    WHERE name='{project_name}'""")
+                    WHERE Project.name='{project_name}'""")
         project=cur.fetchone()
         
         return project
     
-    async def add_project(self,name:str,address:str,description:str,start_date:str,end_date:str,state:str,employe_name:str):
+    async def add_project(self,name:str,address:str,description:str,start_date:str,end_date:str,state:str,employe_id:str):
         cur=self.conn.cursor()
         cur.execute(f"""INSERT INTO project (name,address,description,start_date,end_date,state, id_user) VALUES ('{name}',
                                                                                                                   '{address}',
@@ -111,12 +111,74 @@ class Connection_Database():
                                                                                                                   '{start_date}',
                                                                                                                   '{end_date}',
                                                                                                                   '{state}',
-                                                                                                                  1)""")
+                                                                                                                  {employe_id})""")
         self.conn.commit()
     
     async def delete_project(self,project_name):
         cur=self.conn.cursor()
         cur.execute(f"""DELETE FROM Project WHERE name = '{project_name}'""")
+        self.conn.commit()
+        
+#----------------- REPORTING -------------------
+
+    async def get_reports(self,project_name:str):
+        cur =self.conn.cursor()
+        cur.execute(f"""SELECT 
+                        reporting.id, 
+                        project.name AS project_name, 
+                        reporting.report_date, 
+                        reporting.site_name, 
+                        reporting.employee_responsible, 
+                        reporting.machines_used, 
+                        reporting.same_state, 
+                        reporting.progress, 
+                        reporting.full_day, 
+                        reporting.hours_worked, 
+                        reporting.tools_condition, 
+                        reporting.delays, 
+                        reporting.delay_reason, 
+                        reporting.comments, 
+                        reporting.photos 
+                        FROM reporting JOIN project 
+                        ON reporting.project_id = project.id 
+                        WHERE project.name = '{project_name}'
+                    """)
+        reporting = cur.fetchall()
+        
+        return reporting
+    
+    async def create_report(self,
+                            project_id, 
+                            report_date, 
+                            site_name, 
+                            employee_responsible, 
+                            machines_used, 
+                            same_state, 
+                            progress, 
+                            full_day, 
+                            hours_worked, 
+                            tools_condition, 
+                            delays, 
+                            delay_reason, 
+                            comments, 
+                            photos):
+        cur = self.conn.cursor()
+        cur.execute(f"""INSERT INTO reporting (project_id, 
+                                               report_date, 
+                                               site_name, 
+                                               employee_responsible, 
+                                               machines_used, 
+                                               same_state, 
+                                               progress, 
+                                               full_day, 
+                                               hours_worked, 
+                                               tools_condition, 
+                                               delays, 
+                                               delay_reason, 
+                                               comments, 
+                                               photos)
+                        VALUES ({project_id},TO_DATE('{report_date}','DD-MM-YYYY'),'{site_name}','{employee_responsible}',{machines_used},{same_state},{progress},{full_day},{hours_worked},{tools_condition},{delays},'{delay_reason}','{comments}','{photos}')
+                    """)
         self.conn.commit()
         
         

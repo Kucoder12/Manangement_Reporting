@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS User_Project(id SERIAL PRIMARY KEY,
 
 CREATE TABLE IF NOT EXISTS reporting (
     id SERIAL PRIMARY KEY,
+    project_id INT,
     report_date DATE NOT NULL,
     site_name TEXT NOT NULL,
     employee_responsible TEXT NOT NULL,
@@ -52,7 +53,8 @@ CREATE TABLE IF NOT EXISTS reporting (
     delays BOOLEAN NOT NULL,       
     delay_reason TEXT,             
     comments TEXT,                 
-    photos TEXT[]                  
+    photos TEXT,
+    FOREIGN KEY (project_id) REFERENCES Project(id)               
 );
 
 
@@ -77,12 +79,9 @@ VALUES
 
 
 -- Insertar informes en reporting
-INSERT INTO reporting(report_date, site_name, employee_responsible, machines_used, same_state, progress, full_day, hours_worked, tools_condition, delays, delay_reason, comments, photos)
-VALUES
-('2025-01-15', 'Calle Falsa 123', 'Juan Perez', 5, TRUE, TRUE, TRUE, NULL, TRUE, FALSE, NULL, 'Todo ha ido bien, sin comentarios adicionales.', ARRAY['photo1.jpg', 'photo2.jpg']),
-('2025-03-10', 'Avenida Siempre Viva 456', 'Juan Perez', 3, FALSE, TRUE, FALSE, 4, TRUE, TRUE, 'Retraso por lluvia', 'Se trabajó parcialmente debido al clima.', ARRAY['photo3.jpg', 'photo4.jpg']),
-('2025-02-20', 'Calle Imaginaria 789', 'Juan Perez', 4, TRUE, FALSE, TRUE, NULL, FALSE, FALSE, NULL, 'Se han presentado algunos inconvenientes, pero el trabajo continúa según lo previsto.', ARRAY['photo5.jpg']);
 
+INSERT INTO reporting (project_id,report_date, site_name, employee_responsible, machines_used, same_state, progress, full_day, hours_worked, tools_condition, delays, delay_reason, comments, photos) 
+VALUES (2,'2025-03-10', 'Site A', 'John Doe', 5, TRUE, TRUE, TRUE, 8, TRUE, FALSE, NULL, 'No comments', '{"photo1.jpg", "photo2.jpg"}');
 
 
 INSERT INTO data_login(username, pass)

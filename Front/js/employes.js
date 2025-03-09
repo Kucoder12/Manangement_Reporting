@@ -237,8 +237,6 @@ function deleteModal(employe){
         }
         window.location.href = window.location.href;
         return response.json();
-        
-
     })
 
 }

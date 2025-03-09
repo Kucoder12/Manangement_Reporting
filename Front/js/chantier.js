@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     projectCard.addEventListener("click", ()=>{
                         const projectName = project.name;
                         localStorage.setItem("projectName",projectName);
+                        localStorage.setItem("projectID",project.id)
+                        localStorage.setItem("employeName",project.employe)
+                        localStorage.setItem("employeLastname", project.employe_lastname)
                         console.log(projectName);
                         window.location.href = "./../html/getInfo_project.html";
                     })

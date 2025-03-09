@@ -5,6 +5,7 @@ from database import get_db
 from database.db_connect import *
 from features.generare_password import *
 from features.hashing import *
+from datetime import datetime
 
 
 myapp = FastAPI()
@@ -93,13 +94,15 @@ async def update_employe(id_employe:int, field:str,value:str, db=Depends(get_db)
 @myapp.get('/projects', tags=['Projects'])
 async def get_projects(database=Depends(get_db)):
     data=await database.get_projects()
-    projects=[{'name':project[0],
-               'address':project[1],
-               'description':project[2],
-               'start_date':project[3],
-               'end_date':project[4],
-               'state':project[5],
-               'employe':project[6]}
+    projects=[{'id':project[0],
+               'name':project[1],
+               'address':project[2],
+               'description':project[3],
+               'start_date':project[4],
+               'end_date':project[5],
+               'state':project[6],
+               'employe':project[7],
+               'employe_lastname':project[8]}
                for project in data]
     
     return projects
@@ -107,13 +110,15 @@ async def get_projects(database=Depends(get_db)):
 @myapp.get('/projects/{name}', tags=['Projects'])
 async def get_projects(name:str,database=Depends(get_db)):
     data = await database.get_project_name(name)
-    project=[{'name':data[0],
-               'address':data[1],
-               'description':data[2],
-               'start_date':data[3],
-               'end_date':data[4],
-               'state':data[5],
-               'employe':data[6]}
+    project=[{'id':data[0],
+               'name':data[1],
+               'address':data[2],
+               'description':data[3],
+               'start_date':data[4],
+               'end_date':data[5],
+               'state':data[6],
+               'employe':data[7],
+               'employe_lastname':data[8]}
                ]
     
     return project
@@ -138,5 +143,76 @@ async def delete_project(project_name:str, database=Depends(get_db)):
         return{'message':'Se ha eliminado correctamente'}
     except:
         return {'message':'Ha habido un error'}
+    
+@myapp.get('/projects/{project_name}/reports', tags=['Reports'])
+async def get_reporting(project_name:str, database = Depends(get_db)):
+    
+    try:
+        data = await database.get_reports(project_name)
+        reports = [{"id":report[0],
+                    "project_name":report[1],
+                    "report_date":report[2],
+                    "site_name":report[3],
+                    "employee_responsible":report[4],
+                    "machines_used":report[5],
+                    "same_state":report[6],
+                    "progress":report[7],
+                    "full_day":report[8],
+                    "hours_worked":report[9],
+                    "tools_condition":report[10],
+                    "delays":report[11],
+                    "delay_reason":report[12],
+                    "comments":report[13],
+                    "photos":report[14]}
+                    for report in data]
+        
+        return reports
+    
+    except:
+        raise HTTPException(status_code=400, detail="Error al obtener datos")
+
+@myapp.post('/projects/{project_id}/report/add', tags=['Reports'])
+async def add_report(project_id: int,
+                    report_date: Annotated[str, Form()],
+                    site_name: Annotated[str, Form()],
+                    employee_responsible: Annotated[str, Form()],
+                    machines_used: Annotated[str, Form()],
+                    same_state: Annotated[str, Form()],
+                    progress: Annotated[str, Form()],
+                    full_day: Annotated[str, Form()],
+                    hours_worked: Annotated[str, Form()],
+                    tools_condition: Annotated[str, Form()],
+                    delays: Annotated[str, Form()],
+                    delay_reason: Annotated[str, Form()],
+                    comments: Annotated[str, Form()],
+                    photos: Annotated[str, Form()],
+                    database = Depends(get_db)):
+    
+    try:
+        date_object = datetime.strptime(report_date, "%Y-%m-%d")
+        formated_date = date_object.strftime("%d-%m-%Y")
+        int_machines_used = int(machines_used)
+        int_hours_worked = int(hours_worked)
+        await database.create_report(project_id, 
+                                  formated_date, 
+                                  site_name, 
+                                  employee_responsible, 
+                                  int_machines_used, 
+                                  same_state, 
+                                  progress, 
+                                  full_day, 
+                                  int_hours_worked, 
+                                  tools_condition, 
+                                  delays, 
+                                  delay_reason, 
+                                  comments, 
+                                  photos
+                                )
+        return {'message':'Se ha creado el reporte con éxito'}
+    except ValueError as error:
+       raise HTTPException(status_code=400, detail={str(error)})
+#-------------------- REPORTING ---------------
+
+
         
     
