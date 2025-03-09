@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // Obtener los proyectos al cargar la página
     try {
-        const response = await fetch("http://localhost:8000/projects");
+        const response = await fetch("http://backend:8000/projects");
         if (response.ok) {
             const projects = await response.json();
             console.log(projects); // Verifica que los proyectos se reciben correctamente
