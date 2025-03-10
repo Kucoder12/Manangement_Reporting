@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded",async function (){
         event.preventDefault();
 
         sendForm();
+        window.location.href = "getInfo_project.html";
     })
 
 })
