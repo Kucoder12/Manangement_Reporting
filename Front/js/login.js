@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Enviar datos en formato form-urlencoded
             const urlEncodedData = new URLSearchParams(formData).toString();
 
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await fetch("/goodservices/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //        const formData = new FormData(loginForm); // Captura todos los datos del formulario
 //
 //        try {
-//            const response = await fetch("http://localhost:8000/login", {
+//            const response = await fetch("/goodservices/login", {
 //                method: "POST",
 //                body: formData, // Aquí enviamos los datos del formulario directamente
 //            });

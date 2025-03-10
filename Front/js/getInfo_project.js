@@ -34,7 +34,7 @@ async function getInfo_project(project_name){
     }
 
     try {
-        const response = await fetch(`http://localhost:8000/projects/${project_name}`);
+        const response = await fetch(`/goodservices/projects/${project_name}`);
         if (response.ok){
             const project = await response.json();
             document.getElementById("projectName").innerHTML = project[0].name;
@@ -111,7 +111,7 @@ function initializeFileUpload() {
 function deleteProject(project_name){
     
     try{
-        fetch(`http://localhost:8000/projects/${project_name}/delete`,{
+        fetch(`/goodservices/projects/${project_name}/delete`,{
             
             method: 'DELETE',
             headers: {
@@ -136,7 +136,7 @@ async function getReports(projectName){
 
     const report_section = document.getElementById("report-section");
     try{
-        const response = await fetch(`http://localhost:8000/projects/${projectName}/reports`)
+        const response = await fetch(`/goodservices/projects/${projectName}/reports`)
         if(response.ok){
             const reports = await response.json();
             reports.forEach(report=>{

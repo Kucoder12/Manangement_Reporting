@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const urlEncodedData = new URLSearchParams(formData).toString();
 
             // Enviar los datos al endpoint 'projects/add'
-            const response = await fetch("http://localhost:8000/projects/add", {
+            const response = await fetch("/goodservices/projects/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -40,7 +40,7 @@ async function create_option_form(){
    const managers_form = document.getElementById("employe_name");
 
    try{
-        const response = await fetch("http://localhost:8000/employes/role/managers");
+        const response = await fetch("/goodservices/employes/role/managers");
         if (response.ok){
 
             const managers = await response.json();

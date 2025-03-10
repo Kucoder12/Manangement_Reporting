@@ -16,6 +16,8 @@ services:
     #  interval: 10s
     #  timeout: 5s
     #  retries: 5
+    networks: 
+      - mynetwork
   
   backend:
     container_name: goodservice
@@ -28,6 +30,8 @@ services:
     #depends_on:
     #  database:
     #    condition: service_healthy
+    networks: 
+      - mynetwork
 
   web:
     build: 
@@ -35,5 +39,10 @@ services:
       dockerfile: Dockerfile
     container_name: miapp-nginx
     ports:
-      - "8080:80"
+      - "80:80"
+    networks: 
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge
 

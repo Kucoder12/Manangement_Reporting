@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // Obtener los proyectos al cargar la página
     try {
-        const response = await fetch("http://localhost:8000/employes");
+        const response = await fetch("/goodservices/employes");
         if (response.ok) {
             const employes = await response.json();
             console.log(employes); // Verifica que los proyectos se reciben correctamente
@@ -191,7 +191,7 @@ async function updatefieldModal(fieldId, input, employe_id) {
 
     try {
         // Hacer la petición PUT al backend con employe_id
-        const response = await fetch(`http://localhost:8000/employes/${employe_id}/${fieldId}/${newValue}/update`, {
+        const response = await fetch(`/goodservices/employes/${employe_id}/${fieldId}/${newValue}/update`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -225,7 +225,7 @@ async function updatefieldModal(fieldId, input, employe_id) {
 
 function deleteModal(employe){
     let cdi = employe.cdi
-    fetch('http://localhost:8000/employes/' + cdi + '/delete', {
+    fetch('/goodservices/employes/' + cdi + '/delete', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

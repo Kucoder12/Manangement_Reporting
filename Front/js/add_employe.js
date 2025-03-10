@@ -20,7 +20,7 @@ document.getElementById("add_employe_form").addEventListener("submit", async fun
     const urlEncodedData = new URLSearchParams(formData).toString();
 
     try {
-        const response = await fetch("http://localhost:8000/employes/add", {
+        const response = await fetch("/goodservices/employes/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"

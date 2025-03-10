@@ -39,7 +39,7 @@ async function sendForm(){
 
     console.log(formData.values);
     try {
-      const response = await fetch(`http://localhost:8000/projects/${projecID}/report/add`, {
+      const response = await fetch(`/goodservices/projects/${projecID}/report/add`, {
         method: 'POST',
         body: formData, // Enviamos los datos del formulario como FormData
       });

@@ -20,7 +20,7 @@ async function getInfo_project(){
     }
 
     try {
-        const response = await fetch(`http://localhost:8000/projects/${valor}`);
+        const response = await fetch(`/goodservices/projects/${valor}`);
         if (response.ok){
             const project = await response.json();
             document.getElementById("projectName").innerHTML = project[0].name;
