@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         localStorage.setItem("employeName",project.employe)
                         localStorage.setItem("employeLastname", project.employe_lastname)
                         console.log(projectName);
-                        window.location.href = "./../html/getInfo_project.html";
+                        window.location.href = "getInfo_project.html";
                     })
                 });
             } else {
