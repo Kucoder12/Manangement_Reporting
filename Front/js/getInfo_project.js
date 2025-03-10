@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeFileUpload();
 
     getInfo_project(project_name);
-    getReports(project_name);s
+    getReports(project_name);
     
 
     document.getElementById("deleteProject").addEventListener("click", ()=>{
