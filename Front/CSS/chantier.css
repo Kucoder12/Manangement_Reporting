@@ -192,12 +192,12 @@ td, th {
 }
 
 th {
-    background-color: #FF8C00;
+    background-color: #58D68D;
     color: white;
 }
 
 button {
-    background-color: #FF8C00;
+    background-color: #58D68D;
     color: white;
     padding: 8px 14px;
     border-radius: 4px;
@@ -206,13 +206,13 @@ button {
 }
 
 button:hover {
-    background-color: #58D68D;
+    background-color: #FF8C00;
 }
 
 footer {
     text-align: center;
     padding: 15px;
-    background: linear-gradient(135deg, #58D68D, #FF8C00);
+    background: linear-gradient(135deg, #FF8C00, #58D68D);
     color: #fff;
     position: fixed;
     width: 100%;
